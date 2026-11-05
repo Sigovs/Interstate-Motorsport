@@ -1,0 +1,17 @@
+# Raw downloads: Facebook picks, contact sheets, scraped site markup
+bat-landing/assets/source/
+
+# Client ticket (contains personal phone numbers)
+*.pdf
+
+# Licensed webfont from the client's theme. Do not redistribute in a public repo.
+# The page falls back to Helvetica/Arial without it. Copy it from the live theme for local work.
+bat-landing/assets/fonts/ProximaNova-*
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+
+# Facebook contact sheet (raw)
+interstate-fb-contactsheet*.jpg
