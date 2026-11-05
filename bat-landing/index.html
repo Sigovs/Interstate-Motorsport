@@ -143,36 +143,114 @@ a{color:inherit}
 .intro p{max-width:46em;margin:0 auto;font-size:clamp(20px, 1.6vw, 24px);line-height:1.55;color:#e4e4df}
 
 /* =========================================================
-   PROCESS — six prints, stepping down the page
+   PROCESS — a horizontal reel driven by the page scroll (desktop)
    ========================================================= */
-.process{padding:var(--s10) 0 var(--s10);margin-top:var(--s10);background:var(--paper);color:#141414}
+.process{margin-top:var(--s10);background:var(--paper);color:#141414;position:relative}
 /* accent on the light ground: the brand green taken darker so it holds 3:1 at display size */
 .process .display .w,.process .h3{color:#141414}
 .process .display .g,.process .step-n{color:#5b8a1e}
-.process .process-head .lede,.process .body{color:#55554f}
-.process-head{display:grid;grid-template-columns:repeat(12,1fr);column-gap:var(--s5);align-items:end;margin-bottom:var(--s9)}
-.process-head .display{grid-column:1 / span 6}
-.process-head .lede{grid-column:8 / span 5;color:var(--muted)}
-.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);column-gap:clamp(24px, 3vw, 48px);row-gap:var(--s8)}
-.step .print{aspect-ratio:4 / 3;margin:0 0 var(--s5);padding:0;background:none;box-shadow:none}
+.process .lede,.process .body{color:#55554f}
+
+.reel{position:relative}
+.reel-stage{position:sticky;top:0;height:100svh;overflow:hidden;display:flex;align-items:center;padding-top:76px}
+.reel-track{display:flex;align-items:stretch;gap:clamp(48px, 6vw, 112px);margin:0;padding:0 var(--gutter);height:calc(100svh - 76px - 96px);will-change:transform;list-style:none}
+.reel-head{flex:none;width:clamp(360px, 30vw, 460px);display:flex;flex-direction:column;justify-content:center}
+.reel-head .display{margin-bottom:var(--s6)}
+.reel-head .lede{max-width:22em}
+.reel-hint{margin-top:var(--s7);font-family:var(--display);font-size:18px;letter-spacing:.08em;text-transform:uppercase;color:#5b8a1e;display:inline-flex;align-items:center;gap:var(--s3)}
+.reel-hint .arr{display:inline-block;animation:nudge 1.8s var(--ease-out) 3}
+@keyframes nudge{0%,100%{transform:none}50%{transform:translateX(8px)}}
+
+.step{flex:none;display:flex;flex-direction:column}
+.step.tall{width:clamp(300px, 26vw, 420px);justify-content:flex-start}
+.step.wide{width:clamp(460px, 44vw, 720px);justify-content:flex-end}
+.step.tall .shot{height:62%}
+.step.wide .shot{height:56%}
+.shot{position:relative;margin:0 0 var(--s5);overflow:hidden;background:#d9d7d0}
+.shot img{position:absolute;top:-4%;left:-8%;width:116%;height:108%;max-width:none;object-fit:cover}
 .step-row{display:grid;grid-template-columns:auto 1fr;column-gap:var(--s4);align-items:start}
-.step-n{font-family:var(--display);font-size:clamp(64px, 5.4vw, 88px);line-height:.8;color:var(--accent);font-variant-numeric:tabular-nums}
+.step-n{font-family:var(--display);font-size:clamp(64px, 5.4vw, 92px);line-height:.8;font-variant-numeric:tabular-nums}
 .step .h3{margin:2px 0 var(--s3)}
-.step .body{font-size:17px;line-height:1.55}
+.step .body{font-size:17px;line-height:1.55;max-width:26em}
+.reel-end{flex:none;width:clamp(320px, 28vw, 420px);display:flex;flex-direction:column;justify-content:center;align-items:flex-start;gap:var(--s5)}
+.reel-end .display{font-size:clamp(40px, 3.6vw, 60px)}
+
+/* image wipe: the photo develops as it enters */
+html.js .shot{clip-path:inset(100% 0 0 0);transition:clip-path 1100ms var(--ease-reveal)}
+html.js .shot img{scale:1.14;transition:scale 1500ms var(--ease-reveal)}
+html.js .step.in .shot{clip-path:inset(0 0 0 0)}
+html.js .step.in .shot img{scale:1}
+
+/* below desktop: a plain vertical list */
+@media (max-width:959px){
+  .reel-stage{position:static;height:auto;display:block;overflow:visible;padding:var(--s9) 0}
+  .reel-track{display:grid;grid-template-columns:1fr;gap:var(--s8);height:auto;transform:none !important}
+  .reel-head,.step.tall,.step.wide,.reel-end{width:auto}
+  .reel-hint{display:none}
+  .step .shot,.step.tall .shot,.step.wide .shot{height:auto;aspect-ratio:4 / 3}
+  .step.tall .shot{aspect-ratio:4 / 5}
+  .shot img{top:0;left:0;width:100%;height:100%}
+}
+/* reduced motion: a static two-column list */
+@media (prefers-reduced-motion:reduce){
+  .reel-stage{position:static;height:auto;display:block;overflow:visible;padding:var(--s9) 0}
+  .reel-track{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--s8) var(--s7);height:auto;transform:none !important}
+  .reel-head,.step.tall,.step.wide,.reel-end{width:auto}
+  .reel-head{grid-column:1 / -1}
+  .reel-hint{display:none}
+  .step .shot,.step.tall .shot,.step.wide .shot{height:auto;aspect-ratio:4 / 3}
+  .shot img{top:0;left:0;width:100%;height:100%;transform:none !important;scale:1 !important}
+  html.js .shot{clip-path:none}
+}
+@media (prefers-reduced-motion:reduce) and (max-width:959px){ .reel-track{grid-template-columns:1fr} }
 
 /* =========================================================
    PROOF — their darkened-photo band, four facts
    ========================================================= */
 .proof{position:relative;padding:var(--s10) 0;background:rgba(0,0,0,.28);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
-.proof-head{display:grid;grid-template-columns:repeat(12,1fr);column-gap:var(--s5);align-items:end;margin-bottom:var(--s8)}
-.proof-head .display{grid-column:1 / span 6}
-.proof-head .link{grid-column:8 / span 5;justify-self:end}
-.facts{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);column-gap:var(--s5);border-top:1px solid var(--line-strong)}
-.facts li{padding:var(--s6) var(--s5) 0 0}
-.fact-n{display:block;font-family:var(--display);font-size:clamp(56px, 5.6vw, 92px);line-height:.85;color:var(--accent);font-variant-numeric:tabular-nums;margin-bottom:var(--s4);white-space:nowrap}
-.fact-n small{font-size:.42em;margin-left:.15em;color:var(--text)}
-.fact-t{display:block;font-size:17px;line-height:1.5;color:#c9c9c4;max-width:17em}
-.fact-t strong{display:block;font-weight:400;color:var(--text);font-size:18px;margin-bottom:2px}
+.proof-head{margin-bottom:var(--s8)}
+
+/* bento of stat cards: glass surface, gradient hairline, a green glow anchored per card, spotlight follows the pointer */
+.bento{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);grid-auto-rows:minmax(300px, auto);gap:clamp(16px, 1.6vw, 24px)}
+.card{position:relative;isolation:isolate;overflow:hidden;border-radius:2px;padding:clamp(28px, 2.6vw, 40px);display:flex;flex-direction:column;justify-content:space-between;gap:var(--s6);
+  background:linear-gradient(180deg, #1c1c1c 0%, #171717 100%);border:1px solid rgba(255,255,255,.08);--gx:0%;--gy:0%}
+.card .glowc{position:absolute;z-index:-1;width:90%;aspect-ratio:1;left:var(--gx);top:var(--gy);transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(closest-side, rgba(144,196,61,.10), rgba(144,196,61,0));pointer-events:none}
+.card.c1{--gx:0%;--gy:0%}
+.card.c2{--gx:50%;--gy:0%}
+.card.c3{--gx:100%;--gy:0%}
+.card.c5{--gx:100%;--gy:100%}
+.fact-n{display:block;font-family:var(--display);font-size:clamp(64px, 6.4vw, 112px);line-height:.82;color:var(--accent);font-variant-numeric:tabular-nums;white-space:nowrap}
+.fact-n small{font-size:.38em;margin-left:.15em;color:var(--text)}
+.fact-t{display:block;font-size:17px;line-height:1.5;color:#c9c9c4;max-width:22em}
+.fact-t strong{display:block;font-weight:400;color:var(--text);font-size:19px;margin-bottom:4px}
+.card.wide{grid-column:span 2;padding:0;flex-direction:row;gap:0}
+.card.wide .card-photo{flex:0 0 52%;position:relative;margin:0}
+.card.wide .card-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.card.wide .card-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg, rgba(14,14,14,0) 55%, rgba(20,20,20,.9) 100%)}
+.card.wide .card-body{flex:1;padding:clamp(28px, 2.6vw, 40px);display:flex;flex-direction:column;justify-content:space-between;gap:var(--s6)}
+.card.cta{justify-content:space-between}
+.card.cta .cta-t{font-family:var(--display);font-size:clamp(30px, 2.4vw, 40px);line-height:.95;text-transform:uppercase;margin:0}
+.card.cta .cta-t span{color:var(--accent);display:block}
+.card.cta .btn{align-self:flex-start}
+@media (max-width:959px){
+  .bento{grid-template-columns:1fr 1fr}
+  .card.wide{grid-column:1 / -1}
+}
+@media (max-width:600px){
+  .bento{grid-template-columns:1fr;grid-auto-rows:auto}
+  .card{min-height:240px}
+  .card.wide{flex-direction:column}
+  .card.wide .card-photo{flex:none;aspect-ratio:16 / 10}
+  .card.wide .card-photo::after{background:linear-gradient(180deg, rgba(14,14,14,0) 55%, rgba(20,20,20,.9) 100%)}
+}
+
+
+/* photo reveal on the storage card */
+html.js .card.wide .card-photo{clip-path:inset(0 100% 0 0);transition:clip-path 1200ms var(--ease-reveal) 150ms}
+html.js .card.wide .card-photo img{scale:1.15;transition:scale 1600ms var(--ease-reveal) 150ms}
+html.js .card.wide.in .card-photo{clip-path:inset(0 0 0 0)}
+html.js .card.wide.in .card-photo img{scale:1}
+@media (prefers-reduced-motion:reduce){ html.js .card.wide .card-photo{clip-path:none} html.js .card.wide .card-photo img{scale:1} }
 
 /* =========================================================
    SUBMIT — their "Get my offer" idiom, two steps
@@ -268,10 +346,7 @@ a{color:inherit}
 }
 @media (max-width:959px){
   .hero{min-height:max(620px, 92svh)}
-  .process-head .display,.process-head .lede,.proof-head .display,.proof-head .link{grid-column:1 / -1}
-  .process-head .display,.proof-head .display{margin-bottom:var(--s5)}
   .steps{grid-template-columns:1fr 1fr;row-gap:var(--s7)}
-  .facts{grid-template-columns:1fr 1fr;row-gap:var(--s6)}
   .submit-intro,.offer{grid-column:1 / -1}
   .submit-intro{margin-bottom:var(--s7)}
   .submit-print{display:none}
@@ -290,8 +365,6 @@ a{color:inherit}
   .hero-bg img{object-position:50% 60%}
   .intro{text-align:left}
   .steps{grid-template-columns:1fr}
-  .facts{grid-template-columns:1fr}
-  .facts li{padding-right:0}
   .offer fieldset{grid-template-columns:1fr}
   .offer-foot .btn{width:100%}
   .util{display:none}
@@ -479,55 +552,62 @@ html.js .hero .lines .g{transition-delay:400ms}
 
 <!-- ================= PROCESS ================= -->
 <section class="process" id="how" aria-labelledby="process-title">
-  <div class="wrap">
-    <div class="process-head">
-      <h2 class="display h2 lines" id="process-title"><span class="w">Our BaT process</span><span class="g">from keys to sold</span></h2>
-      <p class="lede rv" style="--d:200ms">Six simple steps, one team, one address. Here is what happens to your car once it arrives at Interstate Motorsport.</p>
-    </div>
-    <ol class="steps">
-      <li class="step rv" style="--d:0ms">
-        <figure class="print"><img src="assets/img/stage-1-1100.jpg" alt="A yellow Lamborghini Diablo roadster parked outside the Interstate Motorsport building" loading="lazy" width="1100" height="1466" style="object-position:50% 70%"></figure>
+  <div class="reel">
+    <div class="reel-stage">
+      <ol class="reel-track">
+      <li class="reel-head">
+        <h2 class="display h2 lines" id="process-title"><span class="w">Our BaT process</span><span class="g">from keys to sold</span></h2>
+        <p class="lede rv" style="--d:200ms">Six simple steps, one team, one address. Here is what happens to your car once it arrives at Interstate Motorsport.</p>
+        <span class="reel-hint" aria-hidden="true">Scroll <span class="arr">→</span></span>
+      </li>
+      <li class="step tall">
+        <figure class="shot"><img src="assets/img/stage-1-1100.jpg" alt="A yellow Lamborghini Diablo roadster parked outside the Interstate Motorsport building" loading="lazy" width="1100" height="1466" style="object-position:50% 70%"></figure>
         <div class="step-row"><span class="step-n" aria-hidden="true">01</span><div>
           <h3 class="display h3">Bring it to Pennington</h3>
           <p class="body">Drive it to our showroom, or we pick it up with enclosed transport. It is stored in our climate-controlled facility from day one.</p>
         </div></div>
       </li>
-      <li class="step rv" style="--d:120ms">
-        <figure class="print"><img src="assets/img/stage-2-1100.jpg" alt="A red Lamborghini Countach with its engine cover open in the Interstate service bay" loading="lazy" width="1100" height="1375"></figure>
+      <li class="step wide">
+        <figure class="shot"><img src="assets/img/stage-2-1100.jpg" alt="A red Lamborghini Countach with its engine cover open in the Interstate service bay" loading="lazy" width="1100" height="1375" style="object-position:50% 55%"></figure>
         <div class="step-row"><span class="step-n" aria-hidden="true">02</span><div>
           <h3 class="display h3">Make it auction-ready</h3>
           <p class="body">Our service department inspects the car and our Auto Spa gives it a full detail, inside and out.</p>
         </div></div>
       </li>
-      <li class="step rv" style="--d:240ms">
-        <figure class="print"><img src="assets/img/stage-3-1100.jpg" alt="Rear three-quarter photo of the yellow Diablo roadster on an outdoor shoot" loading="lazy" width="1100" height="1466" style="object-position:50% 60%"></figure>
+      <li class="step tall">
+        <figure class="shot"><img src="assets/img/stage-3-1100.jpg" alt="Rear three-quarter photo of the yellow Diablo roadster on an outdoor shoot" loading="lazy" width="1100" height="1466" style="object-position:50% 60%"></figure>
         <div class="step-row"><span class="step-n" aria-hidden="true">03</span><div>
           <h3 class="display h3">Shoot every angle</h3>
           <p class="body">Professional photos inside and out, on location and in our showroom. The details serious buyers look for.</p>
         </div></div>
       </li>
-      <li class="step rv" style="--d:0ms">
-        <figure class="print"><img src="assets/img/stage-4-1100.jpg" alt="Close-up of the Diablo's rear lights and engine cover" loading="lazy" width="1100" height="1466"></figure>
+      <li class="step wide">
+        <figure class="shot"><img src="assets/img/stage-4-1100.jpg" alt="Close-up of the Diablo's rear lights and engine cover" loading="lazy" width="1100" height="1466" style="object-position:50% 45%"></figure>
         <div class="step-row"><span class="step-n" aria-hidden="true">04</span><div>
           <h3 class="display h3">Tell its story</h3>
           <p class="body">We write the listing, gather records and paperwork, and submit it to Bring a Trailer. You approve it before it goes live.</p>
         </div></div>
       </li>
-      <li class="step rv" style="--d:120ms">
-        <figure class="print"><img src="assets/img/stage-5-1100.jpg" alt="The yellow Diablo roadster inside the Interstate showroom" loading="lazy" width="1100" height="825"></figure>
+      <li class="step tall">
+        <figure class="shot"><img src="assets/img/stage-5-1100.jpg" alt="The yellow Diablo roadster inside the Interstate showroom" loading="lazy" width="1100" height="825" style="object-position:40% 50%"></figure>
         <div class="step-row"><span class="step-n" aria-hidden="true">05</span><div>
           <h3 class="display h3">Answer every question</h3>
           <p class="body">During the auction we follow every comment, answer bidders and add photos or video on request.</p>
         </div></div>
       </li>
-      <li class="step rv" style="--d:240ms">
-        <figure class="print"><img src="assets/img/stage-6-1100.jpg" alt="The yellow Diablo roadster beside an enclosed transport trailer" loading="lazy" width="1100" height="1466" style="object-position:50% 70%"></figure>
+      <li class="step wide">
+        <figure class="shot"><img src="assets/img/stage-6-1100.jpg" alt="The yellow Diablo roadster beside an enclosed transport trailer" loading="lazy" width="1100" height="1466" style="object-position:50% 72%"></figure>
         <div class="step-row"><span class="step-n" aria-hidden="true">06</span><div>
           <h3 class="display h3">Hand over the keys</h3>
           <p class="body">Once it sells we work with the winning bidder and arrange pickup or enclosed shipping, anywhere in the world.</p>
         </div></div>
       </li>
-    </ol>
+      <li class="reel-end">
+        <p class="display"><span class="w">Ready to</span><span class="g">sell yours?</span></p>
+        <a class="btn btn-primary" href="#submit">Submit Your Vehicle <span class="arr" aria-hidden="true">→</span></a>
+      </li>
+      </ol>
+    </div>
   </div>
 </section>
 
@@ -537,13 +617,20 @@ html.js .hero .lines .g{transition-delay:400ms}
   <div class="wrap">
     <div class="proof-head">
       <h2 class="display h2 lines" id="proof-title"><span class="w">Why sell</span><span class="g">with Interstate</span></h2>
-      <div class="link rv"><!-- TODO: Interstate's BaT member profile URL --><a class="btn btn-ghost" href="#" data-pending>See Our Auctions on Bring a Trailer <span class="arr" aria-hidden="true">→</span></a></div>
     </div>
-    <ul class="facts">
-      <li class="rv" style="--d:0ms"><span class="fact-n">2003</span><span class="fact-t"><strong>In business since</strong>Exotic and classic cars, from one Pennington address.</span></li>
-      <li class="rv" style="--d:110ms"><span class="fact-n">10,000+</span><span class="fact-t"><strong>Vehicles to new homes</strong>Bought and sold through Interstate since we opened.</span></li>
-      <li class="rv" style="--d:220ms"><span class="fact-n">26,000<small>sq ft</small></span><span class="fact-t"><strong>Storage facility</strong>Climate-controlled, dehumidified, fully enclosed and insured.</span></li>
-      <li class="rv" style="--d:330ms"><span class="fact-n">NJ</span><span class="fact-t"><strong>Licensed state dealer</strong>Service department and Auto Spa under the same roof.</span></li>
+    <ul class="bento">
+      <li class="card c1 rv" style="--d:0ms"><span class="glowc" aria-hidden="true"></span><span class="fact-n">2003</span><span class="fact-t"><strong>In business since</strong>Exotic and classic cars, from one Pennington address.</span></li>
+      <li class="card c2 rv" style="--d:110ms"><span class="glowc" aria-hidden="true"></span><span class="fact-n">10,000+</span><span class="fact-t"><strong>Vehicles to new homes</strong>Bought and sold through Interstate since we opened.</span></li>
+      <li class="card c3 rv" style="--d:220ms"><span class="glowc" aria-hidden="true"></span><span class="fact-n">NJ</span><span class="fact-t"><strong>Licensed state dealer</strong>Service department and Auto Spa under the same roof.</span></li>
+      <li class="card wide c4 rv" style="--d:0ms">
+        <figure class="card-photo reveal"><img src="assets/img/storage-1080.jpg" alt="Collector cars stored on the wood floor of the Interstate showroom" loading="lazy" width="1080" height="750"></figure>
+        <div class="card-body"><span class="fact-n">26,000<small>sq ft</small></span><span class="fact-t"><strong>Storage facility</strong>Climate-controlled, dehumidified, fully enclosed and insured.</span></div>
+      </li>
+      <li class="card cta c5 rv" style="--d:110ms"><span class="glowc" aria-hidden="true"></span>
+        <p class="cta-t">See what we<span>have listed</span></p>
+        <!-- TODO: Interstate's BaT member profile URL -->
+        <a class="btn btn-primary" href="#" data-pending>Our Auctions on BaT <span class="arr" aria-hidden="true">→</span></a>
+      </li>
     </ul>
   </div>
 </section>
@@ -731,12 +818,40 @@ html.js .hero .lines .g{transition-delay:400ms}
 
   document.querySelectorAll('[data-pending]').forEach(function(a){ a.addEventListener('click', function(e){ e.preventDefault(); }); });
 
+  /* process reel: vertical scroll drives the horizontal track (desktop, motion allowed) */
+  var reel=document.querySelector('.reel'), track=document.querySelector('.reel-track');
+  var mqDesk=window.matchMedia('(min-width: 960px)'), mqReduce=window.matchMedia('(prefers-reduced-motion: reduce)');
+  var shots=[].slice.call(document.querySelectorAll('.shot img'));
+  var maxX=0, ticking=false;
+  function reelOn(){ return mqDesk.matches && !mqReduce.matches; }
+  function sizeReel(){
+    if(!reelOn()){ reel.style.height=''; track.style.transform=''; shots.forEach(function(i){ i.style.transform=''; }); return; }
+    maxX=Math.max(0, track.scrollWidth - window.innerWidth);
+    reel.style.height=(window.innerHeight + maxX)+'px';
+    updateReel();
+  }
+  function updateReel(){
+    ticking=false; if(!reelOn()) return;
+    var r=reel.getBoundingClientRect(), range=reel.offsetHeight - window.innerHeight;
+    var p=range>0 ? Math.min(1, Math.max(0, -r.top / range)) : 0;
+    track.style.transform='translate3d('+(-p*maxX).toFixed(1)+'px,0,0)';
+    var cx=window.innerWidth/2;
+    shots.forEach(function(img){
+      var b=img.parentElement.getBoundingClientRect(); var off=(b.left + b.width/2 - cx)/window.innerWidth;
+      img.style.transform='translate3d('+(off*-6).toFixed(2)+'%,0,0)';
+    });
+  }
+  window.addEventListener('scroll', function(){ if(!ticking){ ticking=true; requestAnimationFrame(updateReel); } }, {passive:true});
+  window.addEventListener('resize', sizeReel);
+  if(mqDesk.addEventListener){ mqDesk.addEventListener('change', sizeReel); mqReduce.addEventListener('change', sizeReel); }
+  window.addEventListener('load', sizeReel); sizeReel();
+
   /* entrances: hero on load, everything else once when it enters the view */
   var hero=document.querySelector('.hero');
   requestAnimationFrame(function(){ requestAnimationFrame(function(){
     hero.classList.add('in'); hero.querySelectorAll('.rv,.lines').forEach(function(el){ el.classList.add('in'); });
   }); });
-  var targets=[].slice.call(document.querySelectorAll('main .rv, main .lines, footer .lines')).filter(function(el){ return !hero.contains(el); });
+  var targets=[].slice.call(document.querySelectorAll('main .rv, main .lines, footer .lines, .step')).filter(function(el){ return !hero.contains(el); });
   if('IntersectionObserver' in window){
     var io=new IntersectionObserver(function(entries){
       entries.forEach(function(en){ if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); } });
