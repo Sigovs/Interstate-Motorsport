@@ -259,13 +259,15 @@ html.js .card.wide.in .card-photo img{scale:1}
 .menu{grid-column:6 / span 7;list-style:none;margin:0;padding:0;border-top:1px solid var(--line-strong)}
 .menu li{border-bottom:1px solid var(--line-strong)}
 .svc{display:grid;grid-template-columns:auto 1fr auto;column-gap:var(--s5);align-items:start;width:100%;padding:var(--s6) 0;background:none;border:0;color:var(--text);text-align:left;font:inherit;cursor:pointer;text-decoration:none;position:relative}
-.svc-n{font-family:var(--display);font-size:20px;letter-spacing:.06em;color:var(--muted);padding-top:6px;min-width:2.2em;transition:color var(--dur-mid)}
+.svc-n{width:clamp(36px, 2.8vw, 44px);aspect-ratio:1;color:var(--muted);margin-top:-2px;transition:color var(--dur-mid),transform var(--dur-mid) var(--ease-out)}
+.svc-n svg{width:100%;height:100%;display:block}
+.svc:hover .svc-n,.svc:focus-visible .svc-n{transform:translateY(-2px)}
 .svc-t{display:block;font-family:var(--display);font-size:clamp(28px, 2.4vw, 40px);line-height:1;text-transform:uppercase;margin-bottom:var(--s3);transition:color var(--dur-mid)}
 .svc-d{display:block;font-size:17px;line-height:1.55;color:var(--muted);max-width:34em}
 .svc-go{align-self:center;display:inline-flex;align-items:center;gap:var(--s2);font-size:16px;color:var(--muted);white-space:nowrap;transition:color var(--dur-mid)}
 .svc-go .arr{display:inline-block;transition:transform var(--dur-mid) var(--ease-out)}
 .svc:hover .svc-t,.svc:focus-visible .svc-t{color:var(--accent)}
-.svc:hover .svc-n,.svc:hover .svc-go,.svc:focus-visible .svc-go{color:var(--accent)}
+.svc:hover .svc-n,.svc:hover .svc-go,.svc:focus-visible .svc-n,.svc:focus-visible .svc-go{color:var(--accent)}
 .svc:hover .svc-go .arr{transform:translateX(6px)}
 @media (max-width:959px){
   .services-head,.menu{grid-column:1 / -1}
@@ -598,32 +600,32 @@ html.js .hero .lines .g{transition-delay:400ms}
     </div>
     <ul class="menu">
       <li class="rv" style="--d:0ms"><a class="svc" href="#contact" data-service="photography">
-        <span class="svc-n">01</span>
+        <span class="svc-n" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5A1.5 1.5 0 0 1 4.5 7h2.8l1.4-2h6.6l1.4 2h2.8A1.5 1.5 0 0 1 21 8.5v9a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 17.5z"/><circle cx="12" cy="12.8" r="3.6"/></svg></span>
         <span><span class="svc-t">Photography</span><span class="svc-d">A professional photo set for your listing: exterior, interior, engine bay and the details bidders zoom in on.</span></span>
         <span class="svc-go">Select <span class="arr" aria-hidden="true">→</span></span>
       </a></li>
       <li class="rv" style="--d:70ms"><a class="svc" href="#contact" data-service="photo-video">
-        <span class="svc-n">02</span>
+        <span class="svc-n" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="6.5" width="13" height="11" rx="1.5"/><path d="m15.5 10.6 6-3.4v9.6l-6-3.4"/></svg></span>
         <span><span class="svc-t">Photography & Video</span><span class="svc-d">Everything in Photography, plus video for the listing.</span></span>
         <span class="svc-go">Select <span class="arr" aria-hidden="true">→</span></span>
       </a></li>
       <li class="rv" style="--d:140ms"><a class="svc" href="#contact" data-service="preparation">
-        <span class="svc-n">03</span>
+        <span class="svc-n" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3.5l1.7 4.6 4.6 1.7-4.6 1.7L10 16.1l-1.7-4.6L3.7 9.8l4.6-1.7z"/><path d="M17.6 13.6l.8 2.1 2.1.8-2.1.8-.8 2.1-.8-2.1-2.1-.8 2.1-.8z"/></svg></span>
         <span><span class="svc-t">Vehicle Preparation</span><span class="svc-d">Detailing and reconditioning by our Auto Spa and service team, so the car looks its best on camera and in person.</span></span>
         <span class="svc-go">Select <span class="arr" aria-hidden="true">→</span></span>
       </a></li>
       <li class="rv" style="--d:210ms"><a class="svc" href="#contact" data-service="inspection">
-        <span class="svc-n">04</span>
+        <span class="svc-n" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4.3 17.8a8.5 8.5 0 1 1 15.4 0"/><path d="M12 13.8l4.2-4.2"/><circle cx="12" cy="14" r="1.3"/><path d="M12 5.3v1.9M6 8l1.3 1.3M18 8l-1.3 1.3M3.6 13.3h1.8M18.6 13.3h1.8"/></svg></span>
         <span><span class="svc-t">Comprehensive Inspection / Paint Metering</span><span class="svc-d">A full inspection with paint meter readings, documented so bidders can trust what they see.</span></span>
         <span class="svc-go">Select <span class="arr" aria-hidden="true">→</span></span>
       </a></li>
       <li class="rv" style="--d:280ms"><a class="svc" href="#contact" data-service="full-listing">
-        <span class="svc-n">05</span>
+        <span class="svc-n" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 3.5H14l4 4v12a1 1 0 0 1-1 1H6.5a1 1 0 0 1-1-1v-15a1 1 0 0 1 1-1z"/><path d="M14 3.5V8h4M8.5 12h7M8.5 15h7M8.5 18h4.5"/></svg></span>
         <span><span class="svc-t">Full Listing Service</span><span class="svc-d">We write, submit and manage your Bring a Trailer listing, and answer bidders while it runs.</span></span>
         <span class="svc-go">Select <span class="arr" aria-hidden="true">→</span></span>
       </a></li>
       <li class="rv" style="--d:350ms"><a class="svc" href="#contact" data-service="consignment">
-        <span class="svc-n">06</span>
+        <span class="svc-n" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="15.5" r="4.2"/><path d="M11 12.5 20.5 3M16.8 6.7l2.6 2.6M14.3 9.2l2 2"/></svg></span>
         <span><span class="svc-t">Consignment</span><span class="svc-d">Leave the car with us. We store it, prepare it, list it and handle the sale from start to finish.</span></span>
         <span class="svc-go">Select <span class="arr" aria-hidden="true">→</span></span>
       </a></li>
