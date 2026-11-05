@@ -11,9 +11,10 @@ Deliverable: a draft landing page for client approval before it goes live, then 
 - Photography: their own gallery (wood floor, concrete wall), outdoor sets in front of the dark building with bull statues
 
 ## Files
-- `bat-landing/index.html` — the draft page (header + footer rebuilt from the live site, tidied)
+- `bat-landing/index.html` — variant 1: process as a horizontal scroll reel (header + footer rebuilt from the live site, tidied)
+- `bat-landing/index_v2.html` — variant 2: same page, process as vertical alternating photo reveals
 - `bat-landing/assets/` — fonts, logos, processed photos
-- `bat-landing/assets/source/` — raw downloads (site images, FB picks, contact sheets) — not published
+- `bat-landing/assets/source/fb/` — the 20 full-size Facebook picks the crops are made from (git-ignored)
 - `bat-landing/HANDOFF.md` — notes for the AAN developer, including site-wide header/footer changes
 - `bat-landing/CONTENT-LEDGER.md` — every claim and its source
 
