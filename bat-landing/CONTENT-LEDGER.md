@@ -20,6 +20,8 @@ Every factual claim on the page, where it comes from, and its status.
 | Stage 5: answering bidder questions, extra photos/video on request; car stays in showroom | Standard BaT partner flow | **To confirm** |
 | Stage 6: coordinate with winning bidder, pickup or enclosed shipping | Their transport service | **To confirm** |
 | "Submitting does not commit you to listing" | Drafted | **To confirm** |
+| Service menu (v2_2): Photography · Photography & Video · Vehicle Preparation · Comprehensive Inspection / Paint Metering · Full Listing Service | Client email to AAN, 2026-11-05 ("How can Interstate Motorsport assist") | Confirmed (names). **One-line descriptions under each are drafted: to confirm** |
+| Consignment offered alongside individual services | Client email, 2026-11-05 ("not only consignment but also auction preparation services") | Confirmed |
 | Link "See our auctions on Bring a Trailer" | — | **Missing**: BaT member profile URL |
 | Fees / commission | — | Not shown on the page (none of the reference pages show them either). Add only if Interstate wants it. |
 
