@@ -1,0 +1,1110 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BaT Local Partner — Interstate Motorsport (v3)</title>
+<link rel="icon" href="data:,">
+<script>document.documentElement.classList.add('js')</script>
+<meta name="description" content="Interstate Motorsport is an official Bring a Trailer Local Partner in Pennington, NJ. We prepare, photograph, list and manage your Bring a Trailer auction.">
+<style>
+@font-face{font-family:"Staatliches";src:url(assets/fonts/Staatliches-Regular.woff2) format("woff2");font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:"Proxima Nova";src:url(assets/fonts/ProximaNova-Regular.woff) format("woff");font-weight:400;font-style:normal;font-display:swap}
+
+:root{
+  /* client tokens, taken from the live theme */
+  --bg:#141414;
+  --bg-raise:#1b1b1b;
+  --bg-sunk:#0e0e0e;
+  --line:rgba(255,255,255,.12);
+  --line-strong:rgba(255,255,255,.24);
+  --text:#f4f4f1;
+  --muted:#a8a8a3;
+  --accent:#90c43d;
+  --accent-hover:#a3d452;
+  --accent-ink:#10160a;
+  --paper:#f4f3ef;
+  --danger:#ff8a7a;
+
+  --display:"Staatliches", Impact, "Arial Narrow", sans-serif;
+  --body:"Proxima Nova", "Helvetica Neue", Arial, sans-serif;
+
+  --s1:4px; --s2:8px; --s3:12px; --s4:16px; --s5:24px; --s6:32px; --s7:48px; --s8:64px; --s9:96px; --s10:128px; --s11:160px;
+  --gutter:clamp(20px, 5vw, 96px);
+  --maxw:1440px;
+  --header-h:96px;
+  --frame:clamp(8px, .8vw, 14px);
+
+  --ease-out:cubic-bezier(.2,.7,.2,1);
+  --dur-fast:160ms; --dur-mid:320ms;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-padding-top:calc(var(--header-h) + 16px)}
+body{margin:0;background:var(--bg);color:var(--text);font-family:var(--body);font-size:18px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{display:block;max-width:100%;height:auto}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
+.wrap{width:100%;max-width:var(--maxw);margin:0 auto;padding:0 var(--gutter)}
+.skip{position:absolute;left:var(--s4);top:-100px;z-index:200;background:var(--accent);color:var(--accent-ink);padding:var(--s3) var(--s4);text-decoration:none}
+.skip:focus{top:var(--s4)}
+
+/* ---------- type roles ---------- */
+.display{font-family:var(--display);font-weight:400;text-transform:uppercase;letter-spacing:.005em;line-height:.9;margin:0}
+.display .w,.display .g{display:block;white-space:nowrap}
+.display .g{color:var(--accent)}
+.h2{font-size:clamp(42px, 4vw, 64px)}
+.h3{font-size:clamp(28px, 2.1vw, 34px);line-height:.95}
+.lede{font-size:clamp(18px, 1.35vw, 21px);line-height:1.55;margin:0}
+.body{color:var(--muted);margin:0}
+
+/* ---------- buttons ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:var(--s3);min-height:56px;padding:0 var(--s6);font-family:var(--body);font-size:19px;letter-spacing:.01em;text-decoration:none;border:1px solid transparent;border-radius:2px;cursor:pointer;transition:background-color var(--dur-fast) var(--ease-out),color var(--dur-fast),border-color var(--dur-fast)}
+.btn .arr{display:inline-block;transition:transform var(--dur-mid) var(--ease-out)}
+.btn:hover .arr{transform:translateX(4px)}
+.btn-primary{background:var(--accent);color:var(--accent-ink)}
+.btn-primary:hover{background:var(--accent-hover)}
+.btn-ghost{background:rgba(14,14,14,.62);color:var(--text);border-color:var(--line-strong)}
+.btn-ghost:hover{border-color:var(--accent);color:var(--accent)}
+.textlink{font-family:var(--body);font-size:18px;text-decoration:none;color:var(--accent);display:inline-flex;gap:var(--s2);align-items:center;min-height:44px;border-bottom:1px solid rgba(144,196,61,.4);transition:border-color var(--dur-fast),color var(--dur-fast)}
+.textlink:hover{border-color:var(--accent);color:var(--accent-hover)}
+.textlink .arr{transition:transform var(--dur-mid) var(--ease-out)}
+.textlink:hover .arr{transform:translateX(4px)}
+.pending{display:inline-block;margin-left:var(--s3);font-size:14px;color:var(--accent-ink);background:#e9d36b;padding:1px 8px;border-radius:2px;vertical-align:middle}
+
+/* ---------- the print: their framed-photo idiom ---------- */
+.print{margin:0;background:var(--paper);padding:var(--frame);box-shadow:0 24px 48px -24px rgba(0,0,0,.7)}
+.print img{width:100%;height:100%;object-fit:cover}
+
+/* =========================================================
+   HEADER — rebuilt from the live site, tidied (site-wide)
+   ========================================================= */
+.site-header{position:fixed;inset:0 0 auto 0;z-index:100;color:var(--text)}
+.site-header::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,10,10,.82) 0%,rgba(10,10,10,.45) 60%,rgba(10,10,10,0) 100%);pointer-events:none;transition:opacity var(--dur-mid) var(--ease-out)}
+.site-header::after{content:"";position:absolute;inset:0;background:var(--bg);border-bottom:1px solid var(--line);opacity:0;pointer-events:none;transition:opacity var(--dur-mid) var(--ease-out)}
+.site-header.is-solid::before{opacity:0}
+.site-header.is-solid::after{opacity:1}
+.hdr{position:relative;z-index:1;display:flex;align-items:center;gap:var(--s6);height:var(--header-h);transition:height var(--dur-mid) var(--ease-out)}
+.is-solid .hdr{height:76px}
+.brand{flex:none;display:block;width:clamp(180px, 15vw, 236px)}
+.brand img{width:100%;height:auto}
+.hdr-right{margin-left:auto;display:flex;flex-direction:column;align-items:flex-end;gap:var(--s2)}
+.util{display:flex;gap:var(--s5);font-size:15px;color:var(--muted);transition:opacity var(--dur-fast),max-height var(--dur-mid) var(--ease-out);max-height:30px;overflow:hidden}
+.is-solid .util{max-height:0;opacity:0}
+.util a{display:inline-flex;align-items:center;gap:var(--s2);text-decoration:none;color:var(--muted);min-height:28px}
+.util a:hover{color:var(--text)}
+.util svg{width:15px;height:15px;color:var(--accent)}
+.nav{display:flex;gap:clamp(14px, 1.45vw, 28px);list-style:none;margin:0;padding:0}
+.nav > li{position:relative;white-space:nowrap}
+.nav > li > a,.nav > li > button{display:inline-flex;align-items:center;gap:6px;min-height:44px;background:none;border:0;color:var(--text);font-family:var(--body);font-size:15px;letter-spacing:.05em;text-transform:uppercase;text-decoration:none;cursor:pointer;padding:0;position:relative}
+.nav > li > a::after,.nav > li > button::after{content:"";position:absolute;left:0;right:0;bottom:6px;height:2px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform var(--dur-mid) var(--ease-out)}
+.nav > li:hover > a::after,.nav > li:hover > button::after,.nav > li > a:focus-visible::after,.nav > li > button:focus-visible::after,.nav > li.is-current > button::after{transform:scaleX(1)}
+.nav > li.is-current > button{color:var(--accent)}
+.nav .chev{width:10px;height:10px;transition:transform var(--dur-fast)}
+.nav li.is-open .chev{transform:rotate(180deg)}
+.sub{position:absolute;top:100%;left:-16px;min-width:240px;list-style:none;margin:0;padding:var(--s2) 0;background:var(--bg-raise);border:1px solid var(--line);opacity:0;visibility:hidden;transform:translateY(-4px);transition:opacity var(--dur-fast),transform var(--dur-fast),visibility 0s linear var(--dur-fast)}
+.nav li:hover > .sub,.nav li.is-open > .sub{opacity:1;visibility:visible;transform:none;transition-delay:0s}
+.sub a{display:flex;align-items:center;min-height:44px;padding:0 var(--s4);text-decoration:none;font-size:16px;color:var(--text);border-left:2px solid transparent}
+.sub a:hover,.sub a:focus-visible{background:rgba(255,255,255,.04);border-left-color:var(--accent);color:var(--accent)}
+.sub a[aria-current]{color:var(--accent)}
+.sub .new{margin-left:var(--s2);font-family:var(--display);font-size:14px;letter-spacing:.08em;color:var(--accent-ink);background:var(--accent);padding:1px 6px;border-radius:2px}
+.hdr-mobile{display:none}
+.menu-btn,.icon-btn{display:inline-flex;align-items:center;justify-content:center;width:48px;height:48px;background:none;border:1px solid var(--line-strong);border-radius:2px;color:var(--text);cursor:pointer;text-decoration:none}
+.menu-btn:hover,.icon-btn:hover{border-color:var(--accent);color:var(--accent)}
+.menu-btn svg,.icon-btn svg{width:20px;height:20px}
+.drawer{position:fixed;inset:0;z-index:150;background:var(--bg);display:flex;flex-direction:column;padding:var(--s5) var(--gutter) var(--s8);overflow-y:auto;opacity:0;visibility:hidden;transition:opacity var(--dur-mid) var(--ease-out),visibility 0s linear var(--dur-mid)}
+.drawer.is-open{opacity:1;visibility:visible;transition-delay:0s}
+.drawer-top{display:flex;align-items:center;justify-content:space-between;min-height:64px;margin-bottom:var(--s6)}
+.drawer-top .brand{width:180px}
+.drawer nav > ul{list-style:none;margin:0;padding:0}
+.drawer nav > ul > li{border-bottom:1px solid var(--line)}
+.drawer nav > ul > li > a,.drawer summary{display:flex;align-items:center;justify-content:space-between;min-height:60px;font-family:var(--display);font-size:30px;letter-spacing:.02em;text-transform:uppercase;text-decoration:none;color:var(--text);cursor:pointer;list-style:none}
+.drawer summary::-webkit-details-marker{display:none}
+.drawer details[open] summary{color:var(--accent)}
+.drawer details ul{list-style:none;margin:0 0 var(--s4);padding:0}
+.drawer details a{display:flex;align-items:center;min-height:44px;color:var(--muted);text-decoration:none;font-size:18px}
+.drawer details a:hover,.drawer details a[aria-current]{color:var(--accent)}
+.drawer-contact{margin-top:var(--s7);display:grid;gap:var(--s2);font-size:17px;color:var(--muted)}
+.drawer-contact a{color:var(--text);text-decoration:none;display:inline-flex;align-items:center;min-height:44px}
+
+/* =========================================================
+   HERO — headline left, the print right, BaT seal on its corner
+   ========================================================= */
+.hero{position:relative;min-height:max(680px, 100svh);display:flex;align-items:center;justify-content:center;isolation:isolate;overflow:hidden;background:var(--bg);text-align:center}
+.hero-bg{position:absolute;inset:0;z-index:-2}
+.hero-bg img{width:100%;height:100%;object-fit:cover;object-position:35% 72%}
+.hero::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(20,20,20,.72) 0%,rgba(20,20,20,.5) 45%,rgba(20,20,20,.7) 78%,var(--bg) 96%)}
+.hero-copy{position:relative;display:flex;flex-direction:column;align-items:center;padding:calc(var(--header-h) + var(--s7)) var(--gutter) var(--s9)}
+.hero-badge{width:clamp(112px, 9vw, 148px);margin-bottom:var(--s6)}
+.hero h1{font-size:clamp(52px, 8.4vw, 136px);margin:0 0 var(--s5)}
+.hero .lede{max-width:34em;margin:0 auto var(--s7);color:#ededea}
+.cta-row{display:flex;flex-wrap:wrap;gap:var(--s3);justify-content:center}
+
+.intro{padding:var(--s9) 0 0;text-align:center}
+.intro p{max-width:46em;margin:0 auto;font-size:clamp(20px, 1.6vw, 24px);line-height:1.55;color:#e4e4df}
+
+/* =========================================================
+   PROCESS (v2) — vertical: alternating photos that develop as they arrive
+   ========================================================= */
+.process{margin-top:var(--s10);padding:var(--s10) 0 var(--s11);background:var(--paper);color:#141414;position:relative;overflow:clip}
+/* accent on the light ground: the brand green taken darker so it holds 3:1 at display size */
+.process .display .w,.process .h3{color:#141414}
+.process .display .g,.process .step-n{color:#5b8a1e}
+.process .lede,.process .body{color:#55554f}
+.process-head{display:grid;grid-template-columns:repeat(12,1fr);column-gap:var(--s5);align-items:end;margin-bottom:var(--s10)}
+.process-head .display{grid-column:1 / span 6}
+.process-head .lede{grid-column:8 / span 5}
+.vsteps{list-style:none;margin:0;padding:0;display:grid;row-gap:clamp(96px, 11vw, 176px)}
+.vstep{display:grid;grid-template-columns:repeat(12,1fr);column-gap:var(--s5);align-items:center}
+.vstep .shot{grid-column:1 / span 7;position:relative;margin:0;overflow:hidden;background:#d9d7d0;aspect-ratio:4 / 3}
+.vstep .shot img{position:absolute;left:0;top:-8%;width:100%;height:116%;object-fit:cover}
+.vstep .txt{grid-column:9 / span 4}
+.vstep:nth-child(even) .shot{grid-column:6 / span 7;order:2}
+.vstep:nth-child(even) .txt{grid-column:1 / span 4;order:1}
+.vstep:nth-child(3n+2) .shot{aspect-ratio:5 / 4}
+.vstep:nth-child(3n) .shot{aspect-ratio:16 / 10}
+.vstep .step-n{display:block;font-family:var(--display);font-size:clamp(96px, 10vw, 168px);line-height:.78;margin-bottom:var(--s5);font-variant-numeric:tabular-nums}
+.vstep .h3{font-size:clamp(32px, 2.8vw, 46px);margin:0 0 var(--s4)}
+.vstep .body{font-size:18px;line-height:1.6;max-width:24em}
+.vend{margin-top:clamp(96px, 11vw, 176px);display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:var(--s6);border-top:1px solid rgba(20,20,20,.14);padding-top:var(--s7)}
+.vend .display{font-size:clamp(44px, 4.4vw, 72px)}
+
+/* reveal: photo opens from its outer side, text slides in from the other */
+html.js .vstep .shot{clip-path:inset(0 100% 0 0);transition:clip-path 1300ms var(--ease-reveal)}
+html.js .vstep:nth-child(even) .shot{clip-path:inset(0 0 0 100%)}
+html.js .vstep .shot img{scale:1.16;transition:scale 1800ms var(--ease-reveal)}
+html.js .vstep.in .shot{clip-path:inset(0 0 0 0)}
+html.js .vstep.in .shot img{scale:1}
+html.js .vstep .txt > *{opacity:0;transform:translateX(56px);transition:opacity 800ms var(--ease-out),transform 1100ms var(--ease-reveal)}
+html.js .vstep:nth-child(even) .txt > *{transform:translateX(-56px)}
+html.js .vstep.in .txt > *{opacity:1;transform:none}
+html.js .vstep.in .txt > :nth-child(1){transition-delay:250ms}
+html.js .vstep.in .txt > :nth-child(2){transition-delay:380ms}
+html.js .vstep.in .txt > :nth-child(3){transition-delay:500ms}
+
+@media (max-width:959px){
+  .process-head .display,.process-head .lede{grid-column:1 / -1}
+  .process-head .display{margin-bottom:var(--s5)}
+  .process-head{margin-bottom:var(--s8)}
+  .vstep .shot,.vstep:nth-child(even) .shot,.vstep .txt,.vstep:nth-child(even) .txt{grid-column:1 / -1;order:0}
+  .vstep .shot{margin-bottom:var(--s6)}
+  html.js .vstep .shot,html.js .vstep:nth-child(even) .shot{clip-path:inset(100% 0 0 0)}
+  html.js .vstep .txt > *,html.js .vstep:nth-child(even) .txt > *{transform:translateY(24px)}
+  html.js .vstep.in .shot,html.js .vstep.in:nth-child(even) .shot{clip-path:inset(0 0 0 0)}
+  html.js .vstep.in .txt > *,html.js .vstep.in:nth-child(even) .txt > *{transform:none}
+  .vsteps{row-gap:var(--s9)}
+}
+@media (prefers-reduced-motion:reduce){
+  html.js .vstep .shot,html.js .vstep:nth-child(even) .shot{clip-path:none}
+  html.js .vstep .shot img{scale:1;transform:none !important}
+  html.js .vstep .txt > *{opacity:1;transform:none}
+}
+
+/* =========================================================
+   PROOF — their darkened-photo band, four facts
+   ========================================================= */
+.proof{position:relative;padding:var(--s10) 0;background:rgba(0,0,0,.28);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.proof-head{margin-bottom:var(--s8)}
+
+/* bento of stat cards: glass surface, gradient hairline, a green glow anchored per card, spotlight follows the pointer */
+.bento{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);grid-auto-rows:minmax(300px, auto);gap:clamp(16px, 1.6vw, 24px)}
+.card{position:relative;isolation:isolate;overflow:hidden;border-radius:2px;padding:clamp(28px, 2.6vw, 40px);display:flex;flex-direction:column;justify-content:space-between;gap:var(--s6);
+  background:linear-gradient(180deg, #1c1c1c 0%, #171717 100%);border:1px solid rgba(255,255,255,.08);--gx:0%;--gy:0%}
+.card .glowc{position:absolute;z-index:-1;width:90%;aspect-ratio:1;left:var(--gx);top:var(--gy);transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(closest-side, rgba(144,196,61,.10), rgba(144,196,61,0));pointer-events:none}
+.card.c1{--gx:0%;--gy:0%}
+.card.c2{--gx:50%;--gy:0%}
+.card.c3{--gx:100%;--gy:0%}
+.card.c5{--gx:100%;--gy:100%}
+.fact-n{display:block;font-family:var(--display);font-size:clamp(64px, 6.4vw, 112px);line-height:.82;color:var(--accent);font-variant-numeric:tabular-nums;white-space:nowrap}
+.fact-n small{font-size:.38em;margin-left:.15em;color:var(--text)}
+.fact-t{display:block;font-size:17px;line-height:1.5;color:#c9c9c4;max-width:22em}
+.fact-t strong{display:block;font-weight:400;color:var(--text);font-size:19px;margin-bottom:4px}
+.card.wide{grid-column:span 2;padding:0;flex-direction:row;gap:0}
+.card.wide .card-photo{flex:0 0 52%;position:relative;margin:0}
+.card.wide .card-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.card.wide .card-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg, rgba(14,14,14,0) 55%, rgba(20,20,20,.9) 100%)}
+.card.wide .card-body{flex:1;padding:clamp(28px, 2.6vw, 40px);display:flex;flex-direction:column;justify-content:space-between;gap:var(--s6)}
+.card.cta{justify-content:space-between}
+.card.cta .cta-t{font-family:var(--display);font-size:clamp(30px, 2.4vw, 40px);line-height:.95;text-transform:uppercase;margin:0}
+.card.cta .cta-t span{color:var(--accent);display:block}
+.card.cta .btn{align-self:flex-start}
+@media (max-width:959px){
+  .bento{grid-template-columns:1fr 1fr}
+  .card.wide{grid-column:1 / -1}
+}
+@media (max-width:600px){
+  .bento{grid-template-columns:1fr;grid-auto-rows:auto}
+  .card{min-height:240px}
+  .card.wide{flex-direction:column}
+  .card.wide .card-photo{flex:none;aspect-ratio:16 / 10}
+  .card.wide .card-photo::after{background:linear-gradient(180deg, rgba(14,14,14,0) 55%, rgba(20,20,20,.9) 100%)}
+}
+
+
+/* photo reveal on the storage card */
+html.js .card.wide .card-photo{clip-path:inset(0 100% 0 0);transition:clip-path 1200ms var(--ease-reveal) 150ms}
+html.js .card.wide .card-photo img{scale:1.15;transition:scale 1600ms var(--ease-reveal) 150ms}
+html.js .card.wide.in .card-photo{clip-path:inset(0 0 0 0)}
+html.js .card.wide.in .card-photo img{scale:1}
+@media (prefers-reduced-motion:reduce){ html.js .card.wide .card-photo{clip-path:none} html.js .card.wide .card-photo img{scale:1} }
+
+
+/* =========================================================
+   SERVICES (v3) — two rows of photo cards, like the reference
+   ========================================================= */
+.services{position:relative;padding:var(--s10) 0}
+.services-head{text-align:center;max-width:46em;margin:0 auto var(--s8)}
+.services-head .display{margin-bottom:var(--s5)}
+.services-head .body{max-width:38em;margin:0 auto;text-wrap:balance;font-size:clamp(18px, 1.3vw, 20px);line-height:1.6}
+.svc-grid{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px, 2vw, 28px)}
+.svc-card{position:relative;height:100%;overflow:hidden;background:#fff;border:1px solid var(--line);padding:clamp(12px, 1vw, 16px);display:flex;flex-direction:column;text-align:center}
+.svc-photo{margin:0;aspect-ratio:4 / 3;overflow:hidden;background:#e6e4dc}
+.svc-photo img{width:100%;height:100%;object-fit:cover;transition:transform 900ms var(--ease-out)}
+.svc-card:hover .svc-photo img{transform:scale(1.04)}
+.svc-body{flex:1;display:flex;flex-direction:column;align-items:center;gap:var(--s3);padding:var(--s5) var(--s3) var(--s3)}
+.svc-t{display:inline-flex;align-items:center;justify-content:center;gap:10px;margin:0;font-family:var(--display);font-weight:400;font-size:clamp(26px, 2vw, 32px);line-height:1;text-transform:uppercase;color:var(--text)}
+.svc-body .svc-t{flex-direction:column;gap:12px}
+.svc-ico{flex:none;width:26px;height:26px;color:#5b8a1e}
+.svc-ico svg{width:100%;height:100%;display:block}
+.svc-d{margin:0;font-size:16.5px;line-height:1.55;color:var(--muted);max-width:30em;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.svc-more{background:none;border:0;padding:0;min-height:44px;font:inherit;font-size:15px;color:#4a7419;text-decoration:underline;text-underline-offset:4px;cursor:pointer}
+.svc-more:hover{color:#141414}
+.svc-more[hidden]{display:none}
+.svc-foot{margin-top:auto;width:100%;border-top:1px solid var(--line);padding-top:var(--s2)}
+.svc-go{display:inline-flex;align-items:center;justify-content:center;gap:var(--s2);min-height:48px;width:100%;font-size:16px;color:var(--text);text-decoration:none;transition:color var(--dur-fast)}
+.svc-go .arr{display:inline-block;transition:transform var(--dur-mid) var(--ease-out)}
+.svc-go:hover,.svc-go:focus-visible{color:#4a7419}
+.svc-go:hover .arr{transform:translateX(5px)}
+/* the full description opens over the card, so the row never changes height */
+.svc-full{position:absolute;inset:0;z-index:2;background:#fff;padding:clamp(24px, 2.2vw, 36px);display:flex;flex-direction:column;align-items:flex-start;gap:var(--s4);text-align:left;overflow-y:auto;transform:translateY(101%);visibility:hidden;transition:transform 520ms var(--ease-reveal),visibility 0s linear 520ms}
+.svc-card.is-open .svc-full{transform:none;visibility:visible;transition-delay:0s}
+.svc-full .svc-t{justify-content:flex-start;padding-right:56px}
+.svc-full p{margin:0;font-size:17px;line-height:1.6;color:var(--text)}
+.svc-close{position:absolute;top:clamp(14px, 1.4vw, 22px);right:clamp(14px, 1.4vw, 22px);width:44px;height:44px;display:grid;place-items:center;background:none;border:1px solid var(--line-strong);border-radius:2px;color:var(--text);cursor:pointer}
+.svc-close:hover{border-color:#141414}
+.svc-close svg{width:18px;height:18px}
+.svc-full .svc-go{margin-top:auto;justify-content:flex-start;width:auto;color:#4a7419}
+@media (max-width:959px){ .svc-grid{grid-template-columns:1fr 1fr} }
+@media (max-width:600px){
+  .svc-grid{grid-template-columns:1fr}
+  .svc-full{display:none}
+  .svc-card.is-open .svc-d{display:block;-webkit-line-clamp:unset;overflow:visible}
+}
+
+/* form step 1: service choices as square toggle tiles */
+.choices{display:grid;grid-template-columns:1fr 1fr;gap:var(--s3);grid-column:1 / -1}
+.choice{position:relative;display:flex;align-items:center;gap:var(--s3);min-height:60px;padding:var(--s3) var(--s4);background:#222;border:2px solid #2e2e2e;border-radius:2px;cursor:pointer;font-size:16px;line-height:1.3;color:var(--text);transition:border-color var(--dur-fast),background-color var(--dur-fast)}
+.choice input{position:absolute;opacity:0;pointer-events:none}
+.choice .box{flex:none;width:22px;height:22px;border:2px solid #5a5a56;border-radius:2px;display:grid;place-items:center;transition:background-color var(--dur-fast),border-color var(--dur-fast)}
+.choice .box svg{width:13px;height:13px;color:var(--accent-ink);opacity:0}
+.choice:hover{border-color:#4a4a46}
+.choice:has(input:checked){border-color:var(--accent);background:rgba(144,196,61,.1)}
+.choice:has(input:checked) .box{background:var(--accent);border-color:var(--accent)}
+.choice:has(input:checked) .box svg{opacity:1}
+.choice:has(input:focus-visible){outline:2px solid var(--accent);outline-offset:2px}
+.choices-err{grid-column:1 / -1;font-size:14px;color:var(--danger);display:none}
+.choices.has-error + .choices-err{display:block}
+@media (max-width:600px){ .choices{grid-template-columns:1fr} }
+
+/* =========================================================
+   SUBMIT — their "Get my offer" idiom, two steps
+   ========================================================= */
+.submit{padding:var(--s10) 0}
+.submit-grid{display:grid;grid-template-columns:repeat(12,1fr);column-gap:var(--s5);align-items:start}
+.submit-intro{grid-column:1 / span 5}
+.submit-intro .display{margin-bottom:var(--s5)}
+.submit-intro .body{max-width:30em;margin-bottom:var(--s6)}
+.submit-print{width:min(78%, 360px);margin-top:var(--s7)}
+.submit-print .print{aspect-ratio:900 / 566}
+.contact-lines{display:grid;gap:var(--s1);font-size:17px}
+.contact-lines a{display:inline-flex;align-items:center;gap:var(--s3);text-decoration:none;color:var(--text);min-height:44px}
+.contact-lines a:hover{color:var(--accent)}
+.contact-lines svg{width:18px;height:18px;color:var(--accent);flex:none}
+
+.offer{grid-column:7 / span 6;background:var(--bg-raise);border:1px solid var(--line);padding:clamp(28px, 3vw, 48px)}
+.offer-top{display:flex;align-items:baseline;justify-content:space-between;gap:var(--s4);margin-bottom:var(--s6)}
+.offer-title{font-family:var(--display);font-size:clamp(30px, 2.4vw, 40px);line-height:1;text-transform:uppercase;margin:0}
+.offer-count{font-family:var(--display);font-size:22px;letter-spacing:.04em;color:var(--muted);font-variant-numeric:tabular-nums}
+.offer-count b{font-weight:400;color:var(--accent)}
+.offer fieldset{border:0;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:var(--s4)}
+.offer fieldset[hidden]{display:none}
+.offer legend{font-family:var(--display);font-size:20px;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);margin-bottom:var(--s4);padding:0}
+.f{display:flex;flex-direction:column;gap:6px}
+.f.full{grid-column:1 / -1}
+.f label,.f .lbl{font-size:15px;color:#c9c9c4}
+.f .req{color:var(--accent)}
+.f .opt{color:#85857f}
+.f input,.f textarea{width:100%;min-height:52px;background:#fff;border:2px solid #fff;border-radius:2px;color:#141414;font:inherit;font-size:17px;padding:var(--s3) var(--s4);transition:border-color var(--dur-fast)}
+.f textarea{min-height:120px;resize:vertical;line-height:1.5}
+.f input::placeholder,.f textarea::placeholder{color:#8a8a85}
+.f input:focus,.f textarea:focus{outline:none;border-color:var(--accent)}
+.f.has-error input,.f.has-error textarea{border-color:var(--danger)}
+.f .err{font-size:14px;color:var(--danger);display:none}
+.f.has-error .err{display:block}
+.drop{position:relative;border:1px dashed var(--line-strong);border-radius:2px;min-height:88px;display:flex;align-items:center;justify-content:center;gap:var(--s3);color:#c9c9c4;font-size:16px;padding:var(--s4);transition:border-color var(--dur-fast),color var(--dur-fast)}
+.drop:hover,.drop.is-over{border-color:var(--accent);color:var(--text)}
+.drop input{position:absolute;inset:0;opacity:0;cursor:pointer}
+.drop svg{width:22px;height:22px;color:var(--accent);flex:none}
+.drop-list{font-size:15px;margin-top:var(--s1)}
+.offer-foot{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:var(--s4);margin-top:var(--s6)}
+.offer-foot p{margin:0;font-size:15px;color:var(--muted);max-width:22em}
+.back{background:none;border:0;color:var(--muted);font:inherit;font-size:17px;cursor:pointer;min-height:44px;padding:0;text-decoration:underline;text-underline-offset:4px}
+.back:hover{color:var(--text)}
+.form-msg{display:none;margin-top:var(--s5);padding:var(--s3) var(--s4);border-left:3px solid var(--danger);background:rgba(255,138,122,.08);font-size:16px}
+.form-msg.is-on{display:block}
+.form-done{display:none}
+.offer.is-sent .offer-body{display:none}
+.offer.is-sent .form-done{display:block}
+.form-done .display{font-size:clamp(36px, 3vw, 48px);margin-bottom:var(--s4)}
+
+/* =========================================================
+   PROGRAM NOTE
+   ========================================================= */
+.program{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:var(--s7) 0}
+.program-row{display:grid;grid-template-columns:auto 1fr auto;gap:var(--s6);align-items:center}
+.program-row img{width:96px}
+.program-row p{margin:0;color:var(--muted);font-size:16px;max-width:52em}
+
+/* =========================================================
+   FOOTER — rebuilt from the live site, tidied (site-wide)
+   ========================================================= */
+.site-footer{padding:var(--s10) 0 0;background:var(--bg)}
+.ftr-grid{display:grid;grid-template-columns:repeat(12,1fr);grid-template-rows:auto 1fr;column-gap:var(--s5);row-gap:var(--s7)}
+.ftr-head{grid-column:1 / span 5}
+.ftr-head .display{font-size:clamp(46px, 4.6vw, 76px);margin:0}
+.ftr-cols{grid-column:1 / span 5;display:grid;grid-template-columns:1fr 1fr;gap:var(--s6) var(--s5)}
+.ftr-col h3{margin:0 0 var(--s3);font-family:var(--display);font-weight:400;font-size:18px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.ftr-col p,.ftr-col ul{margin:0;padding:0;list-style:none;font-size:17px;line-height:1.55}
+.ftr-col a{text-decoration:none;color:var(--text);display:inline-flex;align-items:center;min-height:44px}
+.ftr-col a:hover{color:var(--accent)}
+.ftr-col a.accent{color:var(--accent)}
+.social{display:flex;gap:var(--s2)}
+.social a{width:44px;height:44px;justify-content:center;border:1px solid var(--line-strong);border-radius:2px}
+.social a:hover{border-color:var(--accent)}
+.social svg{width:18px;height:18px}
+.ftr-map{grid-column:7 / span 6;grid-row:1 / span 2;position:relative;min-height:440px;border:1px solid var(--line);background:#1d1d1d;overflow:hidden}
+.ftr-map iframe{position:absolute;inset:0;width:100%;height:100%;border:0;filter:invert(.9) hue-rotate(180deg) saturate(.55) contrast(.9)}
+.ftr-bar{margin-top:var(--s9);border-top:1px solid var(--line);padding:var(--s4) 0 var(--s5);display:flex;flex-wrap:wrap;gap:var(--s2) var(--s6);justify-content:space-between;align-items:center;font-size:15px;color:var(--muted)}
+.ftr-bar a{color:var(--muted);text-decoration:none;display:inline-flex;align-items:center;min-height:44px}
+.ftr-bar a:hover{color:var(--text)}
+.ftr-bar nav{display:flex;gap:var(--s5)}
+
+
+/* =========================================================
+   V3 LIGHT GROUND — every section below the hero, in the tone of the light process section
+   ========================================================= */
+main > section:not(.hero){--text:#141414;--muted:#55554f;--line:rgba(20,20,20,.1);--line-strong:rgba(20,20,20,.2);--bg-raise:#ffffff;--danger:#b3261e;background:var(--paper);color:var(--text);border-top:1px solid var(--line)}
+main > section.services{border-top:0}
+main > section:not(.hero) .display .g,
+main > section:not(.hero) .fact-n,
+main > section:not(.hero) .offer legend,
+main > section:not(.hero) .offer-count b,
+main > section:not(.hero) .f .req,
+main > section:not(.hero) .contact-lines svg,
+main > section:not(.hero) .card.cta .cta-t span{color:#5b8a1e}
+main > section:not(.hero) .textlink{color:#4a7419;border-color:rgba(74,116,25,.4)}
+main > section:not(.hero) .contact-lines a:hover{color:#4a7419}
+.process{margin-top:0}
+.glow{display:none}
+/* facts */
+.proof .card{background:#fff;border:1px solid var(--line)}
+.proof .card .glowc{display:none}
+.fact-t{color:var(--muted)}
+.card.wide .card-photo::after{display:none}
+/* form */
+.offer{background:#fff;border:1px solid var(--line)}
+.f label,.f .lbl{color:#3a3a36}
+.f .opt{color:#6f6f69}
+.f input,.f textarea{background:#fff;border:1px solid #cfccc3}
+.f input:hover,.f textarea:hover{border-color:#a9a69c}
+.f input:focus,.f textarea:focus{border-color:#5b8a1e;box-shadow:0 0 0 1px #5b8a1e}
+.choice{background:#faf9f6;border:1px solid #d6d3ca;color:var(--text)}
+.choice:hover{border-color:#a9a69c}
+.choice .box{border-color:#9a978e}
+.choice:has(input:checked){border-color:#5b8a1e;background:rgba(144,196,61,.12);box-shadow:inset 0 0 0 1px #5b8a1e}
+.choice:has(input:checked) .box{background:#5b8a1e;border-color:#5b8a1e}
+.choice:has(input:checked) .box svg{color:#fff}
+.drop{color:var(--muted)}
+.form-msg{background:rgba(179,38,30,.06)}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+@media (max-width:1199px){
+  .hdr-desktop{display:none}
+  .hdr-mobile{display:flex;align-items:center;gap:var(--s2);margin-left:auto}
+  :root{--header-h:80px}
+  .is-solid .hdr{height:68px}
+}
+@media (max-width:959px){
+  .hero{min-height:max(620px, 92svh)}
+  .steps{grid-template-columns:1fr 1fr;row-gap:var(--s7)}
+  .submit-intro,.offer{grid-column:1 / -1}
+  .submit-intro{margin-bottom:var(--s7)}
+  .submit-print{display:none}
+  .ftr-head,.ftr-cols,.ftr-map{grid-column:1 / -1}
+  .ftr-map{grid-row:auto;min-height:360px}
+  .program-row{grid-template-columns:auto 1fr}
+  .program-row .textlink{grid-column:1 / -1}
+}
+@media (max-width:600px){
+  body{font-size:17px}
+  .hero h1{font-size:clamp(44px, 13.4vw, 60px)}
+  .h2{font-size:clamp(38px, 11vw, 48px)}
+  .btn{padding:0 var(--s5)}
+  .cta-row{width:100%}
+  .cta-row .btn{flex:1 1 100%}
+  .hero-bg img{object-position:50% 60%}
+  .intro{text-align:left}
+  .steps{grid-template-columns:1fr}
+  .offer fieldset{grid-template-columns:1fr}
+  .offer-foot .btn{width:100%}
+  .util{display:none}
+  .site-footer{padding-top:var(--s8)}
+  .program-row{grid-template-columns:64px 1fr;gap:var(--s4) var(--s5)}
+  .program-row img{width:64px}
+  .process,.proof,.submit{padding-top:var(--s9);padding-bottom:var(--s9)}
+  .ftr-cols{grid-template-columns:1fr}
+}
+/* =========================================================
+   AMBIENT — soft, irregular glows behind sections (static)
+   ========================================================= */
+main{position:relative;overflow-x:clip}
+.intro,.process,.proof,.submit{position:relative}
+.glow{position:absolute;z-index:-1;pointer-events:none;background:var(--accent);filter:blur(clamp(70px, 8vw, 130px));opacity:.15}
+.glow.g1{top:4%;right:-12%;width:46vw;height:30vw;border-radius:63% 37% 54% 46% / 55% 48% 52% 45%;transform:rotate(-16deg)}
+.glow.g2{bottom:6%;left:-14%;width:36vw;height:24vw;border-radius:41% 59% 38% 62% / 57% 36% 64% 43%;transform:rotate(12deg);opacity:.08}
+.glow.g3{top:-35%;left:18%;width:52vw;height:24vw;border-radius:58% 42% 66% 34% / 46% 61% 39% 54%;transform:rotate(-6deg);opacity:.1}
+.glow.g4{top:12%;right:2%;width:40vw;height:36vw;border-radius:47% 53% 35% 65% / 62% 40% 60% 38%;transform:rotate(21deg);opacity:.11}
+.glow.g5{top:-20%;left:-10%;width:38vw;height:22vw;border-radius:55% 45% 61% 39% / 42% 58% 42% 58%;transform:rotate(8deg);opacity:.07;background:#fff}
+@media (max-width:700px){ .glow{width:90vw !important;height:60vw !important;opacity:.1} }
+
+/* =========================================================
+   MOTION — entrances only. Content is visible without JS
+   (states apply under html.js) and with reduced motion.
+   ========================================================= */
+:root{--ease-reveal:cubic-bezier(.16,.84,.24,1);--dur-reveal:1000ms}
+html.js .hero-bg img{transform:scale(1.07);transition:transform 2200ms var(--ease-reveal)}
+html.js .hero.in .hero-bg img{transform:none}
+html.js .lines .w,html.js .lines .g{transform:translateY(55%);clip-path:inset(0 0 100% 0);transition:transform var(--dur-reveal) var(--ease-reveal),clip-path var(--dur-reveal) var(--ease-reveal)}
+html.js .lines .g{transition-delay:140ms}
+html.js .lines.in .w,html.js .lines.in .g{transform:none;clip-path:inset(-12% -2% -12% -2%)}
+html.js .rv{opacity:0;transform:translateY(32px);transition:opacity 800ms var(--ease-out),transform var(--dur-reveal) var(--ease-reveal);transition-delay:var(--d, 0ms)}
+html.js .rv.in{opacity:1;transform:none}
+html.js .hero .lines .w{transition-delay:250ms}
+html.js .hero .lines .g{transition-delay:400ms}
+@media (max-width:600px){
+  html.js .rv{transform:translateY(20px)}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{transition-duration:0s !important;transition-delay:0s !important;scroll-behavior:auto !important}
+  html.js .rv,html.js .lines .w,html.js .lines .g{opacity:1;transform:none;clip-path:none}
+  html.js .hero-bg img{transform:none}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-phone" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" d="M5 3.5h3.2l1.6 4.3-2.1 1.4a11 11 0 0 0 7.1 7.1l1.4-2.1 4.3 1.6V19a1.5 1.5 0 0 1-1.6 1.5C10.4 20 4 13.6 3.5 5.1A1.5 1.5 0 0 1 5 3.5Z"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.6" d="M12 21s-6.5-6.2-6.5-11a6.5 6.5 0 0 1 13 0c0 4.8-6.5 11-6.5 11Z"/><circle cx="12" cy="10" r="2.3" fill="none" stroke="currentColor" stroke-width="1.6"/></symbol>
+  <symbol id="i-heart" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" d="M12 20s-7.5-4.6-7.5-10.1A4.2 4.2 0 0 1 12 7.6a4.2 4.2 0 0 1 7.5 2.3C19.5 15.4 12 20 12 20Z"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24"><path stroke="currentColor" stroke-width="1.6" d="M3 7h18M3 12h18M3 17h18"/></symbol>
+  <symbol id="i-close" viewBox="0 0 24 24"><path stroke="currentColor" stroke-width="1.6" d="M5 5l14 14M19 5 5 19"/></symbol>
+  <symbol id="i-chev" viewBox="0 0 12 12"><path fill="none" stroke="currentColor" stroke-width="1.6" d="m2 4 4 4 4-4"/></symbol>
+  <symbol id="i-upload" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.6" d="M12 16V4m0 0-4.5 4.5M12 4l4.5 4.5M4 15v3.5A1.5 1.5 0 0 0 5.5 20h13a1.5 1.5 0 0 0 1.5-1.5V15"/></symbol>
+  <symbol id="i-ig" viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="4.5" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="3.8" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="17.2" cy="6.8" r="1" fill="currentColor"/></symbol>
+  <symbol id="i-fb" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" d="M13.5 21v-7.5h2.7l.4-3.2h-3.1V8.4c0-.9.3-1.6 1.6-1.6h1.6V4a21 21 0 0 0-2.4-.1c-2.4 0-4 1.4-4 4.1v2.3H7.6v3.2h2.7V21"/></symbol>
+  <symbol id="i-yt" viewBox="0 0 24 24"><rect x="2.8" y="5.5" width="18.4" height="13" rx="3.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path fill="currentColor" d="m10.2 9.2 5 2.8-5 2.8z"/></symbol>
+</svg>
+
+<!-- ================= HEADER (site-wide, tidied) ================= -->
+<header class="site-header" id="top">
+  <div class="wrap hdr">
+    <a class="brand" href="https://www.interstatemotorsport.com/" aria-label="Interstate Motorsport home"><img src="assets/img/brand-logo.svg" alt="Interstate Motorsport" width="338" height="91"></a>
+
+    <div class="hdr-right hdr-desktop">
+      <div class="util">
+        <a href="https://www.interstatemotorsport.com/location-and-directions/"><svg aria-hidden="true"><use href="#i-pin"/></svg>109 Titus Mill Rd, Pennington, NJ 08534</a>
+        <a href="tel:+16092397800"><svg aria-hidden="true"><use href="#i-phone"/></svg>609-239-7800</a>
+        <a href="https://www.interstatemotorsport.com/my-collection/"><svg aria-hidden="true"><use href="#i-heart"/></svg>My Collection</a>
+      </div>
+      <nav aria-label="Main">
+        <ul class="nav">
+          <li><a href="https://www.interstatemotorsport.com/">Home</a></li>
+          <li class="has-sub">
+            <button type="button" aria-expanded="false" aria-controls="sub-inv">Inventory<svg class="chev" aria-hidden="true"><use href="#i-chev"/></svg></button>
+            <ul class="sub" id="sub-inv">
+              <li><a href="https://www.interstatemotorsport.com/new-jersey-luxury-cars-inventory/">View Inventory</a></li>
+              <li><a href="https://www.interstatemotorsport.com/sold-inventory/">Sold Inventory</a></li>
+              <li><a href="https://www.interstatemotorsport.com/my-collection/">Vehicle Finder</a></li>
+              <li><a href="https://www.interstatemotorsport.com/schedule-test-drive/">Schedule an Appointment</a></li>
+            </ul>
+          </li>
+          <li><a href="https://www.interstatemotorsport.com/luxury-car-sales/">Service Department</a></li>
+          <li><a href="https://www.interstatemotorsport.com/storage-services/">Storage</a></li>
+          <li><a href="https://www.interstatemotorsport.com/finance-options/">Financing</a></li>
+          <li class="has-sub is-current">
+            <button type="button" aria-expanded="false" aria-controls="sub-svc">Services<svg class="chev" aria-hidden="true"><use href="#i-chev"/></svg></button>
+            <ul class="sub" id="sub-svc">
+              <li><a href="#top" aria-current="page">Bring a Trailer <span class="new">New</span></a></li>
+              <li><a href="https://www.interstatemotorsport.com/consignment/">Consignment</a></li>
+              <li><a href="https://www.interstatemotorsport.com/sell-my-car/">Sell Your Vehicle</a></li>
+              <li><a href="https://www.interstatemotorsport.com/auto-spa/">Auto Spa</a></li>
+              <li><a href="https://www.interstatemotorsport.com/service/">Parts Department</a></li>
+              <li><a href="https://www.interstatemotorsport.com/film-cars/">Film Cars</a></li>
+            </ul>
+          </li>
+          <li class="has-sub">
+            <button type="button" aria-expanded="false" aria-controls="sub-about">About Us<svg class="chev" aria-hidden="true"><use href="#i-chev"/></svg></button>
+            <ul class="sub" id="sub-about">
+              <li><a href="https://www.interstatemotorsport.com/private-exotic-car-dealership-new-jersey/">Our Store</a></li>
+              <li><a href="https://www.interstatemotorsport.com/exotic-car-sales/">Meet the Team</a></li>
+              <li><a href="https://www.interstatemotorsport.com/testimonials/">Testimonials</a></li>
+              <li><a href="https://www.interstatemotorsport.com/contact-us/">Contact Us</a></li>
+              <li><a href="https://www.interstatemotorsport.com/location-and-directions/">Location &amp; Directions</a></li>
+            </ul>
+          </li>
+          <li><a href="https://www.interstatemotorsport.com/events/">Events</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <div class="hdr-mobile">
+      <a class="icon-btn" href="tel:+16092397800" aria-label="Call 609-239-7800"><svg aria-hidden="true"><use href="#i-phone"/></svg></a>
+      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="drawer" aria-label="Open menu"><svg aria-hidden="true"><use href="#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<div class="drawer" id="drawer" role="dialog" aria-modal="true" aria-label="Menu">
+  <div class="drawer-top">
+    <a class="brand" href="https://www.interstatemotorsport.com/"><img src="assets/img/brand-logo.svg" alt="Interstate Motorsport" width="338" height="91"></a>
+    <button class="menu-btn" type="button" data-close aria-label="Close menu"><svg aria-hidden="true"><use href="#i-close"/></svg></button>
+  </div>
+  <nav aria-label="Main mobile">
+    <ul>
+      <li><a href="https://www.interstatemotorsport.com/">Home</a></li>
+      <li><details><summary>Inventory<svg width="14" height="14" aria-hidden="true"><use href="#i-chev"/></svg></summary><ul>
+        <li><a href="https://www.interstatemotorsport.com/new-jersey-luxury-cars-inventory/">View Inventory</a></li>
+        <li><a href="https://www.interstatemotorsport.com/sold-inventory/">Sold Inventory</a></li>
+        <li><a href="https://www.interstatemotorsport.com/my-collection/">Vehicle Finder</a></li>
+        <li><a href="https://www.interstatemotorsport.com/schedule-test-drive/">Schedule an Appointment</a></li></ul></details></li>
+      <li><a href="https://www.interstatemotorsport.com/luxury-car-sales/">Service Department</a></li>
+      <li><a href="https://www.interstatemotorsport.com/storage-services/">Storage</a></li>
+      <li><a href="https://www.interstatemotorsport.com/finance-options/">Financing</a></li>
+      <li><details open><summary>Services<svg width="14" height="14" aria-hidden="true"><use href="#i-chev"/></svg></summary><ul>
+        <li><a href="#top" aria-current="page" data-close>Bring a Trailer</a></li>
+        <li><a href="https://www.interstatemotorsport.com/consignment/">Consignment</a></li>
+        <li><a href="https://www.interstatemotorsport.com/sell-my-car/">Sell Your Vehicle</a></li>
+        <li><a href="https://www.interstatemotorsport.com/auto-spa/">Auto Spa</a></li>
+        <li><a href="https://www.interstatemotorsport.com/service/">Parts Department</a></li>
+        <li><a href="https://www.interstatemotorsport.com/film-cars/">Film Cars</a></li></ul></details></li>
+      <li><details><summary>About Us<svg width="14" height="14" aria-hidden="true"><use href="#i-chev"/></svg></summary><ul>
+        <li><a href="https://www.interstatemotorsport.com/private-exotic-car-dealership-new-jersey/">Our Store</a></li>
+        <li><a href="https://www.interstatemotorsport.com/exotic-car-sales/">Meet the Team</a></li>
+        <li><a href="https://www.interstatemotorsport.com/testimonials/">Testimonials</a></li>
+        <li><a href="https://www.interstatemotorsport.com/contact-us/">Contact Us</a></li>
+        <li><a href="https://www.interstatemotorsport.com/location-and-directions/">Location &amp; Directions</a></li></ul></details></li>
+      <li><a href="https://www.interstatemotorsport.com/events/">Events</a></li>
+    </ul>
+  </nav>
+  <div class="drawer-contact">
+    <a href="tel:+16092397800">609-239-7800</a>
+    <span>109 Titus Mill Rd, Pennington, NJ 08534</span>
+  </div>
+</div>
+
+<main id="main">
+
+<!-- ================= HERO ================= -->
+<section class="hero" aria-labelledby="hero-title">
+  <div class="hero-bg">
+    <picture>
+      <source media="(max-width: 700px)" srcset="assets/img/hero-mobile-1000.jpg">
+      <img src="assets/img/hero-1920.jpg" srcset="assets/img/hero-1100.jpg 1100w, assets/img/hero-1920.jpg 1920w" sizes="100vw" alt="A row of Lamborghinis with their doors up inside the Interstate Motorsport showroom in Pennington" width="1920" height="1280" fetchpriority="high">
+    </picture>
+  </div>
+  <div class="hero-copy">
+    <img class="hero-badge rv" style="--d:80ms" src="assets/img/BaTLocalPartnerLogo2025white.png" alt="Bring a Trailer Local Partner" width="1538" height="1106">
+    <h1 class="display lines" id="hero-title"><span class="w">Bring a Trailer</span><span class="g">Local Partner</span></h1>
+    <p class="lede rv" style="--d:620ms">Selling your car on Bring a Trailer? Hand us the whole job, or just the parts you need.</p>
+    <div class="cta-row rv" style="--d:760ms">
+      <a class="btn btn-primary" href="#contact">Contact Us <span class="arr" aria-hidden="true">→</span></a>
+      <a class="btn btn-ghost" href="tel:+16092397800">Call 609-239-7800</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ================= SERVICES ================= -->
+<section class="services" id="services" aria-labelledby="services-title">
+  <div class="wrap">
+    <div class="services-head">
+      <h2 class="display h2 lines" id="services-title"><span class="w">How can we</span><span class="g">help you sell?</span></h2>
+      <p class="body rv" style="--d:150ms">Interstate Motorsport is an official Bring a Trailer Local Partner in Pennington, New Jersey. Take one service, combine several, or consign the car and let us run the whole sale.</p>
+    </div>
+    <ul class="svc-grid">
+      <li class="rv" style="--d:0ms"><article class="svc-card" aria-labelledby="svc-t-photography">
+        <figure class="svc-photo"><img src="assets/img/svc-photography-900.jpg" alt="The yellow Diablo roadster photographed outdoors" loading="lazy" width="900" height="675"></figure>
+        <div class="svc-body">
+          <h3 class="svc-t" id="svc-t-photography"><span class="svc-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5A1.5 1.5 0 0 1 4.5 7h2.8l1.4-2h6.6l1.4 2h2.8A1.5 1.5 0 0 1 21 8.5v9a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 17.5z"/><circle cx="12" cy="12.8" r="3.6"/></svg></span>Photography</h3>
+          <p class="svc-d">A professional photo set built for Bring a Trailer: exterior, interior, engine bay and the close-ups bidders zoom in on, shot on location or in our showroom.</p>
+          <button class="svc-more" type="button" aria-expanded="false" aria-controls="svc-full-photography" hidden>View description</button>
+          <div class="svc-foot"><a class="svc-go" href="#contact" data-service="photography">Select <span class="arr" aria-hidden="true">→</span></a></div>
+        </div>
+        <div class="svc-full" id="svc-full-photography" role="region" aria-label="Photography: full description">
+          <h3 class="svc-t"><span class="svc-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5A1.5 1.5 0 0 1 4.5 7h2.8l1.4-2h6.6l1.4 2h2.8A1.5 1.5 0 0 1 21 8.5v9a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 17.5z"/><circle cx="12" cy="12.8" r="3.6"/></svg></span>Photography</h3>
+          <p>A professional photo set built for Bring a Trailer: exterior, interior, engine bay and the close-ups bidders zoom in on, shot on location or in our showroom.</p>
+          <button class="svc-close" type="button" aria-label="Close description"><svg viewBox="0 0 24 24" aria-hidden="true"><path stroke="currentColor" stroke-width="1.6" d="M5 5l14 14M19 5 5 19"/></svg></button>
+          <a class="svc-go" href="#contact" data-service="photography">Select This Service <span class="arr" aria-hidden="true">→</span></a>
+        </div>
+      </article></li>
+      <li class="rv" style="--d:110ms"><article class="svc-card" aria-labelledby="svc-t-photo-video">
+        <figure class="svc-photo"><img src="assets/img/svc-video-900.jpg" alt="A Lamborghini Aventador outside the Interstate Motorsport building" loading="lazy" width="900" height="675"></figure>
+        <div class="svc-body">
+          <h3 class="svc-t" id="svc-t-photo-video"><span class="svc-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="6.5" width="13" height="11" rx="1.5"/><path d="m15.5 10.6 6-3.4v9.6l-6-3.4"/></svg></span>Photography & Video</h3>
+          <p class="svc-d">Everything in Photography, plus video for the listing: a walk-around and the details that are easier to show than to describe.</p>
+          <button class="svc-more" type="button" aria-expanded="false" aria-controls="svc-full-photo-video" hidden>View description</button>
+          <div class="svc-foot"><a class="svc-go" href="#contact" data-service="photo-video">Select <span class="arr" aria-hidden="true">→</span></a></div>
+        </div>
+        <div class="svc-full" id="svc-full-photo-video" role="region" aria-label="Photography & Video: full description">
+          <h3 class="svc-t"><span class="svc-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="6.5" width="13" height="11" rx="1.5"/><path d="m15.5 10.6 6-3.4v9.6l-6-3.4"/></svg></span>Photography & Video</h3>
+          <p>Everything in Photography, plus video for the listing: a walk-around and the details that are easier to show than to describe.</p>
+          <button class="svc-close" type="button" aria-label="Close description"><svg viewBox="0 0 24 24" aria-hidden="true"><path stroke="currentColor" stroke-width="1.6" d="M5 5l14 14M19 5 5 19"/></svg></button>
+          <a class="svc-go" href="#contact" data-service="photo-video">Select This Service <span class="arr" aria-hidden="true">→</span></a>
+        </div>
+      </article></li>
+      <li class="rv" style="--d:220ms"><article class="svc-card" aria-labelledby="svc-t-preparation">
+        <figure class="svc-photo"><img src="assets/img/svc-preparation-900.jpg" alt="A technician detailing a red car in the Interstate shop" loading="lazy" width="900" height="675"></figure>
+        <div class="svc-body">
+          <h3 class="svc-t" id="svc-t-preparation"><span class="svc-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3.5l1.7 4.6 4.6 1.7-4.6 1.7L10 16.1l-1.7-4.6L3.7 9.8l4.6-1.7z"/><path d="M17.6 13.6l.8 2.1 2.1.8-2.1.8-.8 2.1-.8-2.1-2.1-.8 2.1-.8z"/></svg></span>Vehicle Preparation</h3>
+          <p class="svc-d">Detailing and reconditioning by our Auto Spa and service team, so the car looks its best on camera and arrives exactly as described.</p>
+          <button class="svc-more" type="button" aria-expanded="false" aria-controls="svc-full-preparation" hidden>View description</button>
+          <div class="svc-foot"><a class="svc-go" href="#contact" data-service="preparation">Select <span class="arr" aria-hidden="true">→</span></a></div>
+        </div>
+        <div class="svc-full" id="svc-full-preparation" role="region" aria-label="Vehicle Preparation: full description">
+          <h3 class="svc-t"><span class="svc-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3.5l1.7 4.6 4.6 1.7-4.6 1.7L10 16.1l-1.7-4.6L3.7 9.8l4.6-1.7z"/><path d="M17.6 13.6l.8 2.1 2.1.8-2.1.8-.8 2.1-.8-2.1-2.1-.8 2.1-.8z"/></svg></span>Vehicle Preparation</h3>
+          <p>Detailing and reconditioning by our Auto Spa and service team, so the car looks its best on camera and arrives exactly as described.</p>
+          <button class="svc-close" type="button" aria-label="Close description"><svg viewBox="0 0 24 24" aria-hidden="true"><path stroke="currentColor" stroke-width="1.6" d="M5 5l14 14M19 5 5 19"/></svg></button>
+          <a class="svc-go" href="#contact" data-service="preparation">Select This Service <span class="arr" aria-hidden="true">→</span></a>
+        </div>
+      </article></li>
+      <li class="rv" style="--d:0ms"><article class="svc-card" aria-labelledby="svc-t-inspection">
+        <figure class="svc-photo"><img src="assets/img/svc-inspection-900.jpg" alt="An original inspection sticker on a classic car windshield" loading="lazy" width="900" height="675"></figure>
+        <div class="svc-body">
+          <h3 class="svc-t" id="svc-t-inspection"><span class="svc-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4.3 17.8a8.5 8.5 0 1 1 15.4 0"/><path d="M12 13.8l4.2-4.2"/><circle cx="12" cy="14" r="1.3"/><path d="M12 5.3v1.9M6 8l1.3 1.3M18 8l-1.3 1.3M3.6 13.3h1.8M18.6 13.3h1.8"/></svg></span>Comprehensive Inspection / Paint Metering</h3>
+          <p class="svc-d">A comprehensive inspection with paint meter readings, documented in the listing so bidders can trust what they see before they place a bid.</p>
+          <button class="svc-more" type="button" aria-expanded="false" aria-controls="svc-full-inspection" hidden>View description</button>
+          <div class="svc-foot"><a class="svc-go" href="#contact" data-service="inspection">Select <span class="arr" aria-hidden="true">→</span></a></div>
+        </div>
+        <div class="svc-full" id="svc-full-inspection" role="region" aria-label="Comprehensive Inspection / Paint Metering: full description">
+          <h3 class="svc-t"><span class="svc-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4.3 17.8a8.5 8.5 0 1 1 15.4 0"/><path d="M12 13.8l4.2-4.2"/><circle cx="12" cy="14" r="1.3"/><path d="M12 5.3v1.9M6 8l1.3 1.3M18 8l-1.3 1.3M3.6 13.3h1.8M18.6 13.3h1.8"/></svg></span>Comprehensive Inspection / Paint Metering</h3>
+          <p>A comprehensive inspection with paint meter readings, documented in the listing so bidders can trust what they see before they place a bid.</p>
+          <button class="svc-close" type="button" aria-label="Close description"><svg viewBox="0 0 24 24" aria-hidden="true"><path stroke="currentColor" stroke-width="1.6" d="M5 5l14 14M19 5 5 19"/></svg></button>
+          <a class="svc-go" href="#contact" data-service="inspection">Select This Service <span class="arr" aria-hidden="true">→</span></a>
+        </div>
+      </article></li>
+      <li class="rv" style="--d:110ms"><article class="svc-card" aria-labelledby="svc-t-full-listing">
+        <figure class="svc-photo"><img src="assets/img/svc-listing-900.jpg" alt="Close-up of the Lamborghini badge on a yellow Diablo" loading="lazy" width="900" height="675"></figure>
+        <div class="svc-body">
+          <h3 class="svc-t" id="svc-t-full-listing"><span class="svc-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 3.5H14l4 4v12a1 1 0 0 1-1 1H6.5a1 1 0 0 1-1-1v-15a1 1 0 0 1 1-1z"/><path d="M14 3.5V8h4M8.5 12h7M8.5 15h7M8.5 18h4.5"/></svg></span>Full Listing Service</h3>
+          <p class="svc-d">We write and submit your Bring a Trailer listing, gather the records and paperwork, follow every comment and answer bidder questions while the auction runs. You approve the listing before it goes live.</p>
+          <button class="svc-more" type="button" aria-expanded="false" aria-controls="svc-full-full-listing" hidden>View description</button>
+          <div class="svc-foot"><a class="svc-go" href="#contact" data-service="full-listing">Select <span class="arr" aria-hidden="true">→</span></a></div>
+        </div>
+        <div class="svc-full" id="svc-full-full-listing" role="region" aria-label="Full Listing Service: full description">
+          <h3 class="svc-t"><span class="svc-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 3.5H14l4 4v12a1 1 0 0 1-1 1H6.5a1 1 0 0 1-1-1v-15a1 1 0 0 1 1-1z"/><path d="M14 3.5V8h4M8.5 12h7M8.5 15h7M8.5 18h4.5"/></svg></span>Full Listing Service</h3>
+          <p>We write and submit your Bring a Trailer listing, gather the records and paperwork, follow every comment and answer bidder questions while the auction runs. You approve the listing before it goes live.</p>
+          <button class="svc-close" type="button" aria-label="Close description"><svg viewBox="0 0 24 24" aria-hidden="true"><path stroke="currentColor" stroke-width="1.6" d="M5 5l14 14M19 5 5 19"/></svg></button>
+          <a class="svc-go" href="#contact" data-service="full-listing">Select This Service <span class="arr" aria-hidden="true">→</span></a>
+        </div>
+      </article></li>
+      <li class="rv" style="--d:220ms"><article class="svc-card" aria-labelledby="svc-t-consignment">
+        <figure class="svc-photo"><img src="assets/img/svc-consignment-900.jpg" alt="Collector cars on the wood floor of the Interstate showroom" loading="lazy" width="900" height="675"></figure>
+        <div class="svc-body">
+          <h3 class="svc-t" id="svc-t-consignment"><span class="svc-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="15.5" r="4.2"/><path d="M11 12.5 20.5 3M16.8 6.7l2.6 2.6M14.3 9.2l2 2"/></svg></span>Consignment</h3>
+          <p class="svc-d">Leave the car with us. It is stored in our climate-controlled facility, prepared, photographed and listed, and we handle the auction and the handover to the winning bidder, anywhere in the world.</p>
+          <button class="svc-more" type="button" aria-expanded="false" aria-controls="svc-full-consignment" hidden>View description</button>
+          <div class="svc-foot"><a class="svc-go" href="#contact" data-service="consignment">Select <span class="arr" aria-hidden="true">→</span></a></div>
+        </div>
+        <div class="svc-full" id="svc-full-consignment" role="region" aria-label="Consignment: full description">
+          <h3 class="svc-t"><span class="svc-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="15.5" r="4.2"/><path d="M11 12.5 20.5 3M16.8 6.7l2.6 2.6M14.3 9.2l2 2"/></svg></span>Consignment</h3>
+          <p>Leave the car with us. It is stored in our climate-controlled facility, prepared, photographed and listed, and we handle the auction and the handover to the winning bidder, anywhere in the world.</p>
+          <button class="svc-close" type="button" aria-label="Close description"><svg viewBox="0 0 24 24" aria-hidden="true"><path stroke="currentColor" stroke-width="1.6" d="M5 5l14 14M19 5 5 19"/></svg></button>
+          <a class="svc-go" href="#contact" data-service="consignment">Select This Service <span class="arr" aria-hidden="true">→</span></a>
+        </div>
+      </article></li>
+    </ul>
+  </div>
+</section>
+
+
+<!-- ================= PROCESS ================= -->
+<section class="process" id="how" aria-labelledby="process-title">
+  <div class="wrap">
+    <div class="process-head">
+      <h2 class="display h2 lines" id="process-title"><span class="w">Full service</span><span class="g">from keys to sold</span></h2>
+      <p class="lede rv" style="--d:200ms">Choose consignment or our Full Listing Service and this is what happens to your car, step by step. One team, one address.</p>
+    </div>
+    <ol class="vsteps">
+      <li class="vstep">
+        <figure class="shot"><img src="assets/img/stage-1-1100.jpg" alt="A yellow Lamborghini Diablo roadster parked outside the Interstate Motorsport building" loading="lazy" width="1100" height="1466" style="object-position:50% 70%"></figure>
+        <div class="txt">
+          <span class="step-n" aria-hidden="true">01</span>
+          <h3 class="display h3">Bring it to Pennington</h3>
+          <p class="body">Drive it to our showroom, or we pick it up with enclosed transport. It is stored in our climate-controlled facility from day one.</p>
+        </div>
+      </li>
+      <li class="vstep">
+        <figure class="shot"><img src="assets/img/stage-2-1100.jpg" alt="A red Lamborghini Countach with its engine cover open in the Interstate service bay" loading="lazy" width="1100" height="1375" style="object-position:50% 55%"></figure>
+        <div class="txt">
+          <span class="step-n" aria-hidden="true">02</span>
+          <h3 class="display h3">Make it auction-ready</h3>
+          <p class="body">Our service department inspects the car and our Auto Spa gives it a full detail, inside and out.</p>
+        </div>
+      </li>
+      <li class="vstep">
+        <figure class="shot"><img src="assets/img/stage-3-1100.jpg" alt="Rear three-quarter photo of the yellow Diablo roadster on an outdoor shoot" loading="lazy" width="1100" height="1466" style="object-position:50% 60%"></figure>
+        <div class="txt">
+          <span class="step-n" aria-hidden="true">03</span>
+          <h3 class="display h3">Shoot every angle</h3>
+          <p class="body">Professional photos inside and out, on location and in our showroom. The details serious buyers look for.</p>
+        </div>
+      </li>
+      <li class="vstep">
+        <figure class="shot"><img src="assets/img/stage-4-1100.jpg" alt="Close-up of the Diablo's rear lights and engine cover" loading="lazy" width="1100" height="1466" style="object-position:50% 45%"></figure>
+        <div class="txt">
+          <span class="step-n" aria-hidden="true">04</span>
+          <h3 class="display h3">Tell its story</h3>
+          <p class="body">We write the listing, gather records and paperwork, and submit it to Bring a Trailer. You approve it before it goes live.</p>
+        </div>
+      </li>
+      <li class="vstep">
+        <figure class="shot"><img src="assets/img/stage-5-1100.jpg" alt="The yellow Diablo roadster inside the Interstate showroom" loading="lazy" width="1100" height="825" style="object-position:40% 50%"></figure>
+        <div class="txt">
+          <span class="step-n" aria-hidden="true">05</span>
+          <h3 class="display h3">Answer every question</h3>
+          <p class="body">During the auction we follow every comment, answer bidders and add photos or video on request.</p>
+        </div>
+      </li>
+      <li class="vstep">
+        <figure class="shot"><img src="assets/img/stage-6-1100.jpg" alt="The yellow Diablo roadster beside an enclosed transport trailer" loading="lazy" width="1100" height="1466" style="object-position:50% 72%"></figure>
+        <div class="txt">
+          <span class="step-n" aria-hidden="true">06</span>
+          <h3 class="display h3">Hand over the keys</h3>
+          <p class="body">Once it sells we work with the winning bidder and arrange pickup or enclosed shipping, anywhere in the world.</p>
+        </div>
+      </li>
+    </ol>
+    <div class="vend rv">
+      <p class="display"><span class="w">Ready to</span><span class="g">sell yours?</span></p>
+      <a class="btn btn-primary" href="#contact">Contact Us <span class="arr" aria-hidden="true">→</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PROOF ================= -->
+<section class="proof" aria-labelledby="proof-title">
+  <span class="glow g3" aria-hidden="true"></span>
+  <div class="wrap">
+    <div class="proof-head">
+      <h2 class="display h2 lines" id="proof-title"><span class="w">Why sell</span><span class="g">with Interstate</span></h2>
+    </div>
+    <ul class="bento">
+      <li class="card c1 rv" style="--d:0ms"><span class="glowc" aria-hidden="true"></span><span class="fact-n">2003</span><span class="fact-t"><strong>In business since</strong>Exotic and classic cars, from one Pennington address.</span></li>
+      <li class="card c2 rv" style="--d:110ms"><span class="glowc" aria-hidden="true"></span><span class="fact-n">10,000+</span><span class="fact-t"><strong>Vehicles to new homes</strong>Bought and sold through Interstate since we opened.</span></li>
+      <li class="card c3 rv" style="--d:220ms"><span class="glowc" aria-hidden="true"></span><span class="fact-n">NJ</span><span class="fact-t"><strong>Licensed state dealer</strong>Service department and Auto Spa under the same roof.</span></li>
+      <li class="card wide c4 rv" style="--d:0ms">
+        <figure class="card-photo reveal"><img src="assets/img/storage-1080.jpg" alt="Collector cars stored on the wood floor of the Interstate showroom" loading="lazy" width="1080" height="750"></figure>
+        <div class="card-body"><span class="fact-n">26,000<small>sq ft</small></span><span class="fact-t"><strong>Storage facility</strong>Climate-controlled, dehumidified, fully enclosed and insured.</span></div>
+      </li>
+      <li class="card cta c5 rv" style="--d:110ms"><span class="glowc" aria-hidden="true"></span>
+        <p class="cta-t">See what we<span>have listed</span></p>
+        <!-- TODO: Interstate's BaT member profile URL -->
+        <a class="btn btn-primary" href="#" data-pending>Our Auctions on BaT <span class="arr" aria-hidden="true">→</span></a>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= SUBMIT ================= -->
+<section class="submit" id="contact" aria-labelledby="submit-title">
+  <span class="glow g4" aria-hidden="true"></span>
+  <div class="wrap submit-grid">
+    <div class="submit-intro">
+      <h2 class="display h2 lines" id="submit-title"><span class="w">Contact us</span><span class="g">about your car</span></h2>
+      <p class="body rv" style="--d:150ms">Tell us what you need and about the car. We will get back to you to talk it through before anything is booked or listed.</p>
+      <div class="contact-lines">
+        <a href="tel:+16092397800"><svg aria-hidden="true"><use href="#i-phone"/></svg>609-239-7800</a>
+        <a href="https://www.interstatemotorsport.com/location-and-directions/"><svg aria-hidden="true"><use href="#i-pin"/></svg>109 Titus Mill Rd, Pennington, NJ 08534</a>
+      </div>
+    </div>
+
+    <form class="offer rv" style="--d:150ms" id="bat-form" novalidate aria-labelledby="offer-title">
+      <div class="offer-body">
+        <div class="offer-top">
+          <h3 class="offer-title" id="offer-title">Your Request</h3>
+          <span class="offer-count" aria-live="polite"><b data-cur>01</b> / 03</span>
+        </div>
+
+        <fieldset data-step="1">
+          <legend>What do you need?</legend>
+          <div class="choices" role="group" aria-label="Services">
+            <label class="choice"><input type="checkbox" name="services" value="photography"><span class="box"><svg viewBox="0 0 12 12" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" d="m2 6.3 2.6 2.5L10 3.4"/></svg></span>Photography</label>
+            <label class="choice"><input type="checkbox" name="services" value="photo-video"><span class="box"><svg viewBox="0 0 12 12" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" d="m2 6.3 2.6 2.5L10 3.4"/></svg></span>Photography & Video</label>
+            <label class="choice"><input type="checkbox" name="services" value="preparation"><span class="box"><svg viewBox="0 0 12 12" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" d="m2 6.3 2.6 2.5L10 3.4"/></svg></span>Vehicle Preparation</label>
+            <label class="choice"><input type="checkbox" name="services" value="inspection"><span class="box"><svg viewBox="0 0 12 12" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" d="m2 6.3 2.6 2.5L10 3.4"/></svg></span>Comprehensive Inspection / Paint Metering</label>
+            <label class="choice"><input type="checkbox" name="services" value="full-listing"><span class="box"><svg viewBox="0 0 12 12" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" d="m2 6.3 2.6 2.5L10 3.4"/></svg></span>Full Listing Service</label>
+            <label class="choice"><input type="checkbox" name="services" value="consignment"><span class="box"><svg viewBox="0 0 12 12" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" d="m2 6.3 2.6 2.5L10 3.4"/></svg></span>Consignment</label>
+            <label class="choice"><input type="checkbox" name="services" value="not-sure"><span class="box"><svg viewBox="0 0 12 12" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" d="m2 6.3 2.6 2.5L10 3.4"/></svg></span>Not sure yet, let's talk</label>
+          </div>
+          <span class="choices-err" role="alert">Choose at least one option.</span>
+        </fieldset>
+
+        <fieldset data-step="2" hidden>
+          <legend>The car</legend>
+          <div class="f"><label for="yr">Year <span class="req">*</span></label><input id="yr" name="year" inputmode="numeric" placeholder="1997" required><span class="err">Enter the model year.</span></div>
+          <div class="f"><label for="mk">Make <span class="req">*</span></label><input id="mk" name="make" placeholder="Lamborghini" required><span class="err">Enter the make.</span></div>
+          <div class="f"><label for="md">Model <span class="req">*</span></label><input id="md" name="model" placeholder="Diablo VT Roadster" required><span class="err">Enter the model.</span></div>
+          <div class="f"><label for="mi">Mileage <span class="opt">(optional)</span></label><input id="mi" name="mileage" inputmode="numeric"></div>
+          <div class="f full"><label for="loc">Where is the car? <span class="req">*</span></label><input id="loc" name="location" placeholder="City, State or ZIP" required><span class="err">Tell us where the car is.</span></div>
+          <div class="f full"><label for="ab">Tell us about it <span class="opt">(optional)</span></label><textarea id="ab" name="description" placeholder="History, service records, modifications, anything a bidder would ask."></textarea></div>
+        </fieldset>
+
+        <fieldset data-step="3" hidden>
+          <legend>You</legend>
+          <div class="f"><label for="fn">First name <span class="req">*</span></label><input id="fn" name="first_name" autocomplete="given-name" required><span class="err">Enter your first name.</span></div>
+          <div class="f"><label for="ln">Last name <span class="req">*</span></label><input id="ln" name="last_name" autocomplete="family-name" required><span class="err">Enter your last name.</span></div>
+          <div class="f"><label for="em">Email <span class="req">*</span></label><input id="em" name="email" type="email" autocomplete="email" required><span class="err">Enter an email we can reply to.</span></div>
+          <div class="f"><label for="ph">Phone <span class="req">*</span></label><input id="ph" name="phone" type="tel" autocomplete="tel" required><span class="err">Enter a phone number.</span></div>
+          <div class="f full">
+            <span class="lbl">Photos <span class="opt">(optional, a few phone shots are enough)</span></span>
+            <label class="drop" for="photos"><svg aria-hidden="true"><use href="#i-upload"/></svg><span>Drop photos here or <u>choose files</u></span><input id="photos" name="photos" type="file" accept="image/*" multiple></label>
+            <div class="drop-list" aria-live="polite"></div>
+          </div>
+        </fieldset>
+
+        <div class="offer-foot">
+          <button class="back" type="button" data-back hidden>Back</button>
+          <p data-note>No obligation. Choose as many as you like.</p>
+          <button class="btn btn-primary" type="submit" data-next>Continue <span class="arr" aria-hidden="true">→</span></button>
+        </div>
+        <div class="form-msg" role="alert">Some required fields are missing. They are marked above; everything you typed is still here.</div>
+      </div>
+      <div class="form-done" tabindex="-1">
+        <p class="display"><span class="w">Thanks,</span><span class="g">we have it</span></p>
+        <p class="body">Draft preview: this form is not connected yet, so nothing was sent. On the live site it goes to Interstate's sales inbox.</p>
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- ================= PROGRAM NOTE ================= -->
+<section class="program" aria-label="About the Local Partner program">
+  <div class="wrap program-row">
+    <img src="assets/img/BaTLocalPartnerLogo2025black.png" alt="" width="1538" height="1106">
+    <p>Interstate Motorsport is an independent dealership and a member of the Bring a Trailer Local Partner program. Listings are published on, and auctions run by, Bring a Trailer.</p>
+    <a class="textlink" href="https://bringatrailer.com/local-partners/" target="_blank" rel="noopener">About the program <span class="arr" aria-hidden="true">→</span></a>
+  </div>
+</section>
+
+</main>
+
+<!-- ================= FOOTER (site-wide, tidied) ================= -->
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="ftr-grid">
+      <div class="ftr-head">
+        <h2 class="display lines"><span class="w">Get in touch</span><span class="g">with us</span></h2>
+      </div>
+      <div class="ftr-cols">
+        <div class="ftr-col">
+          <h3>Visit</h3>
+          <p>109 Titus Mill Rd<br>Pennington, NJ 08534</p>
+          <a class="accent" href="https://www.google.com/maps/dir/?api=1&amp;destination=109+Titus+Mill+Rd,+Pennington,+NJ+08534" target="_blank" rel="noopener">Get directions →</a>
+        </div>
+        <div class="ftr-col">
+          <h3>Call</h3>
+          <a href="tel:+16092397800">609-239-7800</a>
+          <h3 style="margin-top:var(--s5)">Follow</h3>
+          <div class="social">
+            <a href="https://www.instagram.com/interstatemotorsport/" target="_blank" rel="noopener" aria-label="Instagram"><svg aria-hidden="true"><use href="#i-ig"/></svg></a>
+            <a href="https://www.facebook.com/INTERSTATEMOTORSPORT/" target="_blank" rel="noopener" aria-label="Facebook"><svg aria-hidden="true"><use href="#i-fb"/></svg></a>
+            <a href="https://www.youtube.com/channel/UCvFwkQD7jz6BL-tl-F_WIzw" target="_blank" rel="noopener" aria-label="YouTube"><svg aria-hidden="true"><use href="#i-yt"/></svg></a>
+          </div>
+        </div>
+        <div class="ftr-col">
+          <h3>Buy</h3>
+          <ul>
+            <li><a href="https://www.interstatemotorsport.com/new-jersey-luxury-cars-inventory/">Inventory</a></li>
+            <li><a href="https://www.interstatemotorsport.com/sold-inventory/">Sold Inventory</a></li>
+            <li><a href="https://www.interstatemotorsport.com/finance-options/">Financing</a></li>
+          </ul>
+        </div>
+        <div class="ftr-col">
+          <h3>Sell &amp; store</h3>
+          <ul>
+            <li><a href="#top">Bring a Trailer</a></li>
+            <li><a href="https://www.interstatemotorsport.com/consignment/">Consignment</a></li>
+            <li><a href="https://www.interstatemotorsport.com/storage-services/">Storage</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="ftr-map">
+        <iframe title="Map: Interstate Motorsport, 109 Titus Mill Rd, Pennington, NJ" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://maps.google.com/maps?q=Interstate%20Motorsport%2C%20109%20Titus%20Mill%20Rd%2C%20Pennington%2C%20NJ%2008534&amp;z=13&amp;output=embed"></iframe>
+      </div>
+    </div>
+    <!-- Removed in the tidy: footer-bg.png (two cut-out car renders under the copyright line).
+         Why: low-resolution cut-outs floating with no ground, not Interstate's own cars, and they ended the page on decoration.
+         Restore: re-add <img src="/wp-content/themes/aanWordpress/assets/images/footer-bg.png"> after .ftr-bar. -->
+    <div class="ftr-bar">
+      <span>© 2026 Interstate Motorsport. All rights reserved.</span>
+      <nav aria-label="Legal"><a href="https://www.interstatemotorsport.com/site-map/">Sitemap</a><a href="https://www.interstatemotorsport.com/privacy-policy/">Privacy Policy</a></nav>
+      <span>Powered by <a href="https://www.allautonetwork.com/" target="_blank" rel="noopener">All Auto Network</a></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var header=document.querySelector('.site-header');
+  function onScroll(){ header.classList.toggle('is-solid', window.scrollY>40); }
+  onScroll(); window.addEventListener('scroll', onScroll, {passive:true});
+
+  /* desktop dropdowns: hover via CSS, click/keyboard via aria-expanded */
+  function closeSubs(){ document.querySelectorAll('.nav .has-sub.is-open').forEach(function(o){ o.classList.remove('is-open'); o.querySelector('button').setAttribute('aria-expanded','false'); }); }
+  document.querySelectorAll('.nav .has-sub > button').forEach(function(btn){
+    btn.addEventListener('click', function(){ var li=btn.parentElement, open=!li.classList.contains('is-open'); closeSubs(); li.classList.toggle('is-open', open); btn.setAttribute('aria-expanded', String(open)); });
+  });
+  document.addEventListener('click', function(e){ if(!e.target.closest('.nav .has-sub')) closeSubs(); });
+
+  /* mobile drawer */
+  var drawer=document.getElementById('drawer'), openBtn=document.querySelector('.hdr-mobile .menu-btn');
+  function closeDrawer(){ if(!drawer.classList.contains('is-open')) return; drawer.classList.remove('is-open'); openBtn.setAttribute('aria-expanded','false'); document.body.style.overflow=''; openBtn.focus(); }
+  openBtn.addEventListener('click', function(){ drawer.classList.add('is-open'); openBtn.setAttribute('aria-expanded','true'); document.body.style.overflow='hidden'; drawer.querySelector('[data-close]').focus(); });
+  drawer.querySelectorAll('[data-close]').forEach(function(b){ b.addEventListener('click', closeDrawer); });
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape'){ var open=document.querySelector('.nav .has-sub.is-open button'); closeSubs(); if(open) open.focus(); closeDrawer(); } });
+
+  /* three-step form, in the site's "Get my offer" pattern: services, car, you */
+  var form=document.getElementById('bat-form'), msg=form.querySelector('.form-msg');
+  var steps=form.querySelectorAll('fieldset[data-step]'), cur=form.querySelector('[data-cur]');
+  var next=form.querySelector('[data-next]'), back=form.querySelector('[data-back]'), note=form.querySelector('[data-note]');
+  var choicesBox=form.querySelector('.choices'), step=1, LAST=3;
+  var labels={1:'Continue', 2:'Continue to final step', 3:'Send Request'};
+  var notes={1:'No obligation. Choose as many as you like.', 2:'', 3:''};
+  function show(n){
+    step=n; steps.forEach(function(fs){ fs.hidden = +fs.dataset.step!==n; });
+    cur.textContent='0'+n; back.hidden = n===1; note.textContent=notes[n]; note.hidden=!notes[n];
+    next.innerHTML = labels[n]+' <span class="arr" aria-hidden="true">→</span>';
+    msg.classList.remove('is-on');
+  }
+  function check(fs){
+    if(fs.dataset.step==='1'){
+      var any=form.querySelectorAll('input[name="services"]:checked').length>0;
+      choicesBox.classList.toggle('has-error', !any);
+      if(!any){ form.querySelector('input[name="services"]').focus(); return false; }
+      return true;
+    }
+    var first=null;
+    fs.querySelectorAll('input[required],textarea[required]').forEach(function(inp){
+      var bad=!inp.value.trim() || (inp.type==='email' && !/^\S+@\S+\.\S+$/.test(inp.value));
+      inp.closest('.f').classList.toggle('has-error', bad); inp.setAttribute('aria-invalid', String(bad));
+      if(bad && !first) first=inp;
+    });
+    if(first){ msg.classList.add('is-on'); first.focus(); return false; }
+    msg.classList.remove('is-on'); return true;
+  }
+  form.querySelectorAll('input[required],textarea[required]').forEach(function(inp){
+    inp.addEventListener('input', function(){ if(inp.value.trim()) inp.closest('.f').classList.remove('has-error'); });
+  });
+  form.querySelectorAll('input[name="services"]').forEach(function(c){ c.addEventListener('change', function(){ choicesBox.classList.remove('has-error'); }); });
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    var fs=form.querySelector('fieldset[data-step="'+step+'"]');
+    if(!check(fs)) return;
+    if(step<LAST){ show(step+1); var f=form.querySelector('fieldset[data-step="'+step+'"] input'); if(f) f.focus(); return; }
+    form.classList.add('is-sent'); form.querySelector('.form-done').focus();
+  });
+  back.addEventListener('click', function(){ show(step-1); var f=form.querySelector('fieldset[data-step="'+step+'"] input'); if(f) f.focus(); });
+
+  /* service cards: "View description" only when the text is clipped; the panel opens over the card */
+  var cardsEls=[].slice.call(document.querySelectorAll('.svc-card')), mqPhone=window.matchMedia('(max-width: 600px)');
+  function checkClamp(){
+    cardsEls.forEach(function(c){
+      var d=c.querySelector('.svc-d'), more=c.querySelector('.svc-more');
+      if(c.classList.contains('is-open')) return;
+      more.hidden = !(d.scrollHeight > d.clientHeight + 2);
+    });
+  }
+  function closeCard(c, focusBack){
+    if(!c.classList.contains('is-open')) return;
+    c.classList.remove('is-open'); c.querySelector('.svc-more').setAttribute('aria-expanded','false');
+    if(focusBack) c.querySelector('.svc-more').focus();
+  }
+  cardsEls.forEach(function(c){
+    var more=c.querySelector('.svc-more'), close=c.querySelector('.svc-close');
+    more.addEventListener('click', function(){
+      if(mqPhone.matches){
+        var open=!c.classList.contains('is-open');
+        c.classList.toggle('is-open', open); more.setAttribute('aria-expanded', String(open));
+        more.textContent = open ? 'Hide description' : 'View description';
+        return;
+      }
+      cardsEls.forEach(function(o){ if(o!==c) closeCard(o,false); });
+      c.classList.add('is-open'); more.setAttribute('aria-expanded','true');
+      setTimeout(function(){ close.focus(); }, 60);
+    });
+    close.addEventListener('click', function(){ closeCard(c, true); });
+    c.addEventListener('keydown', function(e){ if(e.key==='Escape') closeCard(c, true); });
+  });
+  checkClamp(); window.addEventListener('resize', checkClamp);
+  if(document.fonts && document.fonts.ready) document.fonts.ready.then(checkClamp);
+
+  /* service menu: picking a service preselects it in the form */
+  document.querySelectorAll('[data-service]').forEach(function(a){
+    a.addEventListener('click', function(){
+      var box=form.querySelector('input[name="services"][value="'+a.dataset.service+'"]');
+      if(box){ box.checked=true; choicesBox.classList.remove('has-error'); }
+      if(form.classList.contains('is-sent')) return;
+      show(1);
+    });
+  });
+  var file=document.getElementById('photos'), list=form.querySelector('.drop-list'), drop=form.querySelector('.drop');
+  file.addEventListener('change', function(){ var n=file.files.length; list.textContent = n ? n+(n===1?' photo':' photos')+' added' : ''; });
+  ['dragenter','dragover'].forEach(function(t){ drop.addEventListener(t, function(){ drop.classList.add('is-over'); }); });
+  ['dragleave','drop'].forEach(function(t){ drop.addEventListener(t, function(){ drop.classList.remove('is-over'); }); });
+
+  document.querySelectorAll('[data-pending]').forEach(function(a){ a.addEventListener('click', function(e){ e.preventDefault(); }); });
+
+  /* process (v2): photos drift slightly inside their frames while scrolling */
+  var mqReduce=window.matchMedia('(prefers-reduced-motion: reduce)');
+  var vimgs=[].slice.call(document.querySelectorAll('.vstep .shot img')), vt=false;
+  function drift(){
+    vt=false; if(mqReduce.matches) return;
+    var vh=window.innerHeight;
+    vimgs.forEach(function(img){
+      var r=img.parentElement.getBoundingClientRect(); if(r.bottom<0||r.top>vh) return;
+      var off=((r.top + r.height/2) - vh/2)/vh;
+      img.style.transform='translate3d(0,'+(off*-7).toFixed(2)+'%,0)';
+    });
+  }
+  window.addEventListener('scroll', function(){ if(!vt){ vt=true; requestAnimationFrame(drift); } }, {passive:true});
+  drift();
+
+  /* entrances: hero on load, everything else once when it enters the view */
+  var hero=document.querySelector('.hero');
+  requestAnimationFrame(function(){ requestAnimationFrame(function(){
+    hero.classList.add('in'); hero.querySelectorAll('.rv,.lines').forEach(function(el){ el.classList.add('in'); });
+  }); });
+  var targets=[].slice.call(document.querySelectorAll('main .rv, main .lines, footer .lines, .vstep')).filter(function(el){ return !hero.contains(el); });
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(entries){
+      entries.forEach(function(en){ if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); } });
+    },{rootMargin:'0px 0px -12% 0px', threshold:0.01});
+    targets.forEach(function(el){ io.observe(el); });
+  } else { targets.forEach(function(el){ el.classList.add('in'); }); }
+})();
+</script>
+</body>
+</html>

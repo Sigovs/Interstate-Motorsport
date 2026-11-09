@@ -13,6 +13,8 @@ Deliverable: a draft landing page for client approval before it goes live, then 
 ## Files
 - `bat-landing/index.html` — variant 1: process as a horizontal scroll reel (header + footer rebuilt from the live site, tidied)
 - `bat-landing/index_v2.html` — variant 2: same page, process as vertical alternating photo reveals
+- `bat-landing/index_v2_2.html` — client-chosen layout #2 with services menu and 3-step form
+- `bat-landing/index_v3.html` — current: v2_2 on a light ground (hero stays dark) with services as 3×2 photo cards
 - `bat-landing/assets/` — fonts, logos, processed photos
 - `bat-landing/assets/source/fb/` — the 20 full-size Facebook picks the crops are made from (git-ignored)
 - `bat-landing/HANDOFF.md` — notes for the AAN developer, including site-wide header/footer changes
@@ -24,5 +26,6 @@ Deliverable: a draft landing page for client approval before it goes live, then 
 - 2026-11-05 · Draft v1 scored 3/10, hero text composition 1/10. Banned: dash/line before eyebrow labels, radio-button circles in progress lists. Hero text must not float over the photo's subject. It needs a decided edge and no eyebrow that repeats the BaT badge.
 - 2026-11-05 · v2 (framed prints, stepped grid, sticker) scored 2/10. Alex: the references all open with a BIG hero and are clean sites. Approved direction (v3): full-bleed darkened showroom hero, centered badge + two-line title + CTA; plain 3×2 process grid; one light section for rhythm (paper #f4f3ef, darker green #5b8a1e for accent on light); entrance slide-in motion; subtle blurred irregular green glows on the dark background.
 - 2026-11-05 · CLIENT CHOSE LAYOUT #2 (vertical). Working file now `index_v2_2.html`: top CTA "Contact Us"; services menu ("How can we help you sell?") with the client's five services + Consignment; selecting one preselects it in a 3-step form (services → car → you), modelled on enthusiastspec.com/submit. Client wants to edit text/photos himself later: solve at the WordPress port, not in the draft. Alex approved v2_2 ("krasivo"): the menu-style services list and the tile-checkbox form are the approved patterns.
+- 2026-11-09 · Client round 2 → `index_v3.html`. (1) Whole page light except the hero, all sections in the tone of the light process section (#f4f3ef), site header/footer stay dark. (2) Services as photo cards in two rows (3×2), modelled on enthusiastspec.com/bring-a-trailer "Our Services". Descriptions clamp to 3 lines; "View description" appears only when clipped. Desktop and tablet open it as a panel over the card (no row jump), phones expand inline. Never overwrite earlier versions: each round is a new file.
 - 2026-11-05 · Git: repo github.com/Sigovs/Interstate-Motorsport (public). Licensed Proxima Nova, raw FB downloads and the ticket PDF stay git-ignored.
 - 2026-11-05 · Use the client's Facebook photos (facebook.com/INTERSTATEMOTORSPORT/photos); download only the picks actually used, not the whole album.
