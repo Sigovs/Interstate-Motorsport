@@ -26,7 +26,7 @@ Every factual claim on the page, where it comes from, and its status.
 | Fees / commission | — | Not shown on the page (none of the reference pages show them either). Add only if Interstate wants it. |
 
 ## Images
-All photos are Interstate Motorsport's own, taken from facebook.com/INTERSTATEMOTORSPORT/photos (picks only). Nothing generated.
+All photos are Interstate Motorsport's own, taken from facebook.com/INTERSTATEMOTORSPORT/photos (picks only), except one AI-generated placeholder in v3 (paint metering card, listed below).
 
 | File | FB contact-sheet # | Shows |
 |---|---|---|
@@ -38,5 +38,7 @@ All photos are Interstate Motorsport's own, taken from facebook.com/INTERSTATEMO
 | stage-5 | 213 | Diablo roadster in the showroom |
 | stage-6 | 208 | Diablo roadster beside enclosed trailer |
 | gallery-1400 | 53 | Showroom floor |
+
+| svc-paintmeter-900 (v3, Inspection / Paint Metering card) | **AI-generated, not Interstate's** | fal.ai `fal-ai/nano-banana-pro`, 2026-11-09, request 01a1c207-5d2b-7f22-a3ba-e98f4bee30cf, variant 3 of 4. Prompt: technician's gloved hand with a digital paint thickness gauge on a red classic sports car, dark workshop, wood floor, concrete wall, no text or logos. Placeholder until the client sends a real paint-metering photo. Raw file: `assets/source/generated/`. |
 
 The Diablo shown through the stages is used as an illustration of the process. The page does not claim it was sold on BaT.
